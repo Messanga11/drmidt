@@ -1,0 +1,73 @@
+footer {
+    display: flex;
+    flex-direction: column;
+    padding: 0 $mainSpacing;
+    padding-top: 80px;
+    background-color: $footerBg;
+    margin-top: 100px;
+    color: $textSecondary;
+    .footer__top {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        padding-bottom: 107px;
+        article {
+            width: 15rem;
+            font-size: 16px;
+            font-weight: bold;
+            word-break: break-word;
+            margin: 5px;
+            h2 {
+                padding-bottom: 32px;
+                font-size: 36px;
+                font-weight: bold;
+                font-stretch: normal;
+                font-style: normal;
+                line-height: 1.22;
+                letter-spacing: normal;
+                text-align: left;
+            }
+            p{
+                font-stretch: normal;
+                font-style: normal;
+                line-height: 1.2;
+                letter-spacing: normal;
+                text-align: left;
+            }
+            ul {
+                list-style: none;
+                padding: 0;
+                li {
+                    padding: 17px 0;
+                    a {
+                        display: inline-block;
+                        height: 60px;
+                        border: none;
+                        outline-width: 0;
+                        background-color: transparent;
+                        margin: 0 5px;
+                        svg {
+                            object-fit: contain;
+                            height: 100%;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .footer__bottom {
+        display: flex;
+        text-align: center;
+        padding-top: 37px;
+        padding-bottom: 20px;
+        font-size: 16px;
+        font-weight: bold;
+        border-top: solid 0.5px #87848442;
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+        span {
+            font-size: 28px;
+        }
+    }
+}
