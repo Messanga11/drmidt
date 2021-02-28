@@ -4,12 +4,16 @@
     grid-template-rows: 1fr 1fr;
     margin-top: 0!important;
     row-gap: 40px;
+    overflow-x: scroll;
 }
 
 .member__sub {
     display: flex;
     align-items: center;
     text-align: center;
+    h6 {
+        font-size: 1.4rem;
+    }
     .member {
         margin: 0 15px;
     }

@@ -27,19 +27,24 @@
             </div>
             <div class="nav__bottom">
                 <div class="logo">
+                    <button id="hamburger">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
                     <img src="assets/logo_blason_cameroun.png" alt="logo">
                     <div class="logo__text">
                         <h6>MINMIDT</h6>
                         <h6>Délégation Régionale du Littoral</h6>
                     </div>
                 </div>
-                <div class="nav__wrapper">
+                <div id="navwrapper" class="nav__mobile">
                     <ul>
                         <li class="nav__item">
                             <a href="index.html" class="nav__link nav__link--active">Acceuil</a>
                         </li>
                         <li class="nav__item">
-                            <a href="services.html" class="nav__link">Services
+                            <a href="#" class="nav__link">Services
                                 <svg xmlns="http://www.w3.org/2000/svg" width="14.221" height="9.229" viewBox="0 0 14.221 9.229">
                                     <path d="M9.111 11.229L2 4.118 4.118 2l4.993 4.993L14.1 2l2.118 2.118z" transform="translate(-2 -2)"/>
                                 </svg>
@@ -91,7 +96,7 @@
                             </div>
                         </li>
                         <li class="nav__item">
-                            <a href="comite.html" class="nav__link">Comité Régional
+                            <a href="#" class="nav__link">Comité Régional
                                 <svg xmlns="http://www.w3.org/2000/svg" width="14.221" height="9.229" viewBox="0 0 14.221 9.229">
                                     <path d="M9.111 11.229L2 4.118 4.118 2l4.993 4.993L14.1 2l2.118 2.118z" transform="translate(-2 -2)"/>
                                 </svg>
@@ -99,7 +104,7 @@
                             <div class="nav__wrapper nav__wrapper--absolute">
                                 <ul>
                                     <li class="nav__item">
-                                        <a href="services.html" class="nav__link nav__link--active">Organigramme</a>
+                                        <a href="comite.html" class="nav__link nav__link--active">Organigramme</a>
                                     </li>
                                     <li class="nav__item">
                                         <a href="#" class="nav__link">Planning
@@ -168,10 +173,13 @@
                         </li>
                     </ul>
                 </div>
-                <div class="search">
-                    <button>
-                        <img src="assets/loupe.svg" alt="loupe">
-                    </button>
+                <div class="search__container">
+                    <div class="search">
+                        <input type="text" placeholder="Rechercher">
+                        <button id="searchBtn">
+                            <img src="assets/loupe.svg" alt="loupe">
+                        </button>
+                    </div>
                 </div>
             </div>
             <div class="banner">
@@ -374,5 +382,6 @@
             </div>
         </footer>
     </div>
+    <script src="js/main.js"></script>
 </body>
 </html>

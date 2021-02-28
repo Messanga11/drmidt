@@ -13,6 +13,7 @@ main {
         display: flex;
         align-items: flex-end;
         background-color: #000;
+        padding-top: 100px;
         .actu__topAsset {
             background-color: blue;
             color: $textSecondary;
@@ -92,7 +93,7 @@ main {
     .section__typeOneItem {
         display: flex;
         flex-direction: column;
-        max-width: 450px;
+        max-width: 350px;
         height: 472px;
         margin-right: 2.5%;
         .section__itemImage img {
@@ -105,6 +106,7 @@ main {
             h3 {
                 margin-top: 34px;
                 color: $titleColor;
+                font-size: 16px;
             }
             p {
                 font-size: $sectionTextSize;
@@ -131,6 +133,7 @@ main {
         display: grid;
         place-items: center;
         text-align: center;
+        padding: 20px;
         h2 {
             font-size: 48px;
             font-weight: bold;
@@ -144,7 +147,6 @@ main {
     .suggestions__right {
         .suggestions__rightInputs {
             display: flex;
-            flex-wrap: wrap;
             flex: 1;
             padding: 0 23px;
             padding-top: 41px;
@@ -158,6 +160,7 @@ main {
                 margin-left: auto;
                 margin-right: 33px;
                 margin-bottom: 20px;
+                margin-top: 10px;
                 width: 70px;
                 height: 24px;
                 color: $textSecondary;
@@ -182,6 +185,7 @@ main {
         }
         input, textarea {
             margin-top: 5px;
+            margin-bottom: 5px;
             border-radius: 5px;
             border: solid 1px #e0e0e0;
             background-color: #ffffff;
@@ -200,6 +204,7 @@ main {
         .input__textArea {
             flex: 0.5;
             margin: 0 10px;
+            font-size: 16px;
             textarea {
                 height: 118px;
                 width: 100%;
@@ -210,4 +215,41 @@ main {
 }
 .suggestions > .suggestions__right, .suggestions > .suggestions__left {
     box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+}
+
+@media screen and (max-width: 990px) {
+    .suggestions__rightInputs {
+        flex-direction: column;
+    }
+}
+
+@media screen and (max-width: 760px) {
+    .actu {
+        display: flex;
+        flex-direction: column;
+        .actu__item {
+            min-height: 250px;
+        }
+    }
+    
+    .articles {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .suggestions {
+        grid-template-columns: 1fr;
+        .suggestions__left {
+            padding: 100px 0;
+        }
+    }
+}
+
+
+@media screen and (max-width: 560px) {
+    $mainSpacing: 1rem;
+    main {
+        padding: 0 $mainSpacing!important;
+    }
 }
