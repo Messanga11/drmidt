@@ -7,7 +7,6 @@ const hamburger = document.getElementById("hamburger");
 const x = window.matchMedia("(max-width: 690px)");
 
 const navMobileHandler = (x) => {
-  console.log("object");
   if (x.matches) {
     navBar.classList.remove("nav__wrapper");
     navBar.classList.add("nav__mobile");
@@ -19,12 +18,14 @@ const navMobileHandler = (x) => {
 
 window.onload = () => {
   searchBtn.onclick = () => {
-    if (searchInput.style.width == "140px") {
+    if (searchInput.style.width == "200px") {
       search.classList.remove("border");
       searchInput.style.width = 0;
+      searchBtn.innerHTML = `<img src="assets/loupe.svg" alt="loupe">`;
     } else {
       search.classList.add("border");
-      searchInput.style.width = "140px";
+      searchInput.style.width = "200px";
+      searchBtn.innerHTML = `<strong style="padding: 5px;">X</strong>`;
     }
   };
 

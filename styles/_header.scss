@@ -183,6 +183,9 @@
                 top: 0;
                 transition: 0.2s;
                 background-color: white;
+                * {
+                    transition: 0.2s;
+                }
                 input {
                     display: block;
                     width: 0;
@@ -193,7 +196,7 @@
                     left: -140px;
                     z-index: 1;
                     transition: 0.3s;
-                    padding-left: 10px;
+                    padding: 10px;
                 }
                 button {
                     position: relative;
@@ -214,9 +217,10 @@
         color: $bannerColor;
         place-items: center;
         height: 400px;
-        padding: 50px 0;
+        padding-top: 50px;
         h2 {
             font-size: $headerTextSize;
+            text-transform: uppercase;
             font-weight: bold;
             font-stretch: normal;
             font-style: normal;
@@ -275,6 +279,12 @@
 }
 
 @media screen and (max-width: 690px) {
+    
+    .logo {
+        img {
+            max-width: 50px!important;
+        }
+    }
     #hamburger {
         display: flex!important;
     }

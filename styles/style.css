@@ -278,6 +278,11 @@
   background-color: white;
 }
 
+#header .nav__bottom .search__container .search * {
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+}
+
 #header .nav__bottom .search__container .search input {
   display: block;
   width: 0;
@@ -289,7 +294,7 @@
   z-index: 1;
   -webkit-transition: 0.3s;
   transition: 0.3s;
-  padding-left: 10px;
+  padding: 10px;
 }
 
 #header .nav__bottom .search__container .search button {
@@ -310,11 +315,12 @@
   color: #d99827;
   place-items: center;
   height: 400px;
-  padding: 50px 0;
+  padding-top: 50px;
 }
 
 #header .banner h2 {
   font-size: 7rem;
+  text-transform: uppercase;
   font-weight: bold;
   font-stretch: normal;
   font-style: normal;
@@ -373,6 +379,9 @@
 }
 
 @media screen and (max-width: 690px) {
+  .logo img {
+    max-width: 50px !important;
+  }
   #hamburger {
     display: -webkit-box !important;
     display: -ms-flexbox !important;
@@ -540,7 +549,7 @@ main {
   top: 29px;
   left: 30px;
   padding: 5px 10px;
-  border-radius: 5px;
+  border-radius: 2px;
   text-transform: uppercase;
 }
 
