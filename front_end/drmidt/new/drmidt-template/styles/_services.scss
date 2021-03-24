@@ -1,0 +1,27 @@
+.section__members {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    margin-top: 0!important;
+    row-gap: 40px;
+    overflow-x: scroll;
+}
+
+.section__attributions {
+    h2 {
+        margin: 50px;
+        text-align: center;
+        color: $titleColor!important;
+        font-size: 4rem;
+    }
+    h3 {
+        font-size: 2rem;
+        margin-bottom: 15px;
+    }
+    article {
+        margin-top: 48px;
+        padding: 0 30px;
+        padding-bottom: 20px;
+        font-size: 1.6rem;
+    }
+}

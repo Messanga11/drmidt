@@ -1,0 +1,31 @@
+{% extends "blog/base.html" %}
+
+{% block title %}{{post.title}}{% endblock %}
+{% block content_left %}
+<h1 class="blogTitle">{{post.title}}</h1>
+  <div class="blog-container">
+  <article class="card">
+		{% comment %} <div class="card__meta">
+			<span class="icon icon--time">6 min</span>
+			<span class="icon icon--comment"><a href="#">2 comments</a></span>
+		</div> {% endcomment %}
+		<header class="card__thumb">
+			<a href="#"><img src="{% if post.image %}{{post.image}}{% else %}https://images.unsplash.com/photo-1512466699224-9d8217244131?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=4b6f389eb54cb8e27ee8ee5d4040a5d7&dpr=1&auto=format&fit=crop&w=1000&q=80&cs=tinysrgb{% endif %}" ></a>
+			
+		</header>
+		<div class="card__date">
+			<span class="card__date__day">{{ post.publish }}</span>
+		</div>
+		<div class="card__body">
+			<div class="card__category"><a href="#">{{ post.category }}</a></div>
+			<div class="card__title"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></div>
+			<p class="card__description">{{ post.body|truncatewords:30|linebreaks }}</p>
+		</div>
+	</article>
+  </div>
+{% endblock %}
+{% block recent_articles %}
+  {% for post in posts %}
+			<li><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></li>
+  {% endfor %}
+{% endblock %}

@@ -1,0 +1,33 @@
+@import "./variables";
+@import "./header";
+@import "./main";
+@import "./sections";
+@import "./services";
+@import "./comite";
+@import "./footer";
+
+* {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+a {
+    text-decoration: none;
+}
+
+@media screen and (max-width: 760px) {
+    html {
+        font-size: 52%;
+    }
+}
+
+@media screen and (max-width: 640px) {
+    html {
+        font-size: 45%;
+    }
+}

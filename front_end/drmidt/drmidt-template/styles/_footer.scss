@@ -1,0 +1,85 @@
+footer {
+    display: flex;
+    flex-direction: column;
+    padding: 0 $mainSpacing;
+    padding-top: 80px;
+    background-color: $footerBg;
+    margin-top: 100px;
+    color: $textSecondary;
+    .footer__top {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(200px, 1fr));
+        article {
+            font-size: 16px;
+            font-weight: bold;
+            word-break: break-word;
+            margin: 5px;
+            h2 {
+                padding-bottom: 15px;
+                font-size: 36px;
+                font-weight: bold;
+                font-stretch: normal;
+                font-style: normal;
+                line-height: 1.22;
+                letter-spacing: normal;
+                text-align: left;
+            }
+            p{
+                font-stretch: normal;
+                font-style: normal;
+                line-height: 1.2;
+                letter-spacing: normal;
+                text-align: left;
+            }
+            ul {
+                list-style: none;
+                padding: 0;
+                li {
+                    padding: 17px 0;
+                    a {
+                        display: inline-block;
+                        height: 60px;
+                        border: none;
+                        outline-width: 0;
+                        background-color: transparent;
+                        margin: 0 5px;
+                        svg {
+                            object-fit: contain;
+                            height: 100%;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .footer__bottom {
+        display: flex;
+        text-align: center;
+        padding-top: 37px;
+        padding-bottom: 20px;
+        font-size: 16px;
+        font-weight: bold;
+        border-top: solid 0.5px #87848442;
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+        span {
+            font-size: 28px;
+        }
+    }
+}
+
+@media screen and (max-width: 990px) {
+    .footer__top {
+        grid-template-columns: repeat(2, minmax(200px, 1fr))!important;
+        h2 {
+            margin-top: 40px;
+        }
+    }
+}
+
+@media screen and (max-width: 530px) {
+    .footer__top {
+        grid-template-columns: minmax(200px, 1fr)!important;
+    }
+}
