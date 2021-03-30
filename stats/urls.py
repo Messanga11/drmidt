@@ -9,7 +9,8 @@ router.register('chartstats', views.Dept_chartView)
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
 urlpatterns = [
-    path("statistiques/", views.index),
+    path("statistiques/", views.index, name='stats'),
+    path("cadre-juridique/", views.cadre_juridique, name="cadrej"),
     path("", views.Dept_chartView),
     path("stats/", views.Dept_chartView),
     path('api/', include(router.urls)),

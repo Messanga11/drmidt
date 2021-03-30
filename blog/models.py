@@ -23,7 +23,6 @@ class Categories(models.TextChoices):
 
 class Post(models.Model):
     STATUS_CHOICES = (
-
         ('draft', 'Draft'),
         ('published', 'Published')
     )
@@ -31,7 +30,7 @@ class Post(models.Model):
     category = models.CharField(max_length=50, choices=Categories.choices, default=Categories.Actualite)
     excerpt = models.CharField(max_length=150)
     slug = models.SlugField(max_length=250, unique_for_date='publish')
-    thumbnail = models.ImageField(upload_to='photos/%Y/%m', blank=True)
+    thumbnail = models.ImageField(upload_to='photos', blank=True)
     body = models.TextField()
     publish = models.DateTimeField(default=timezone.now)
     created = models.DateTimeField(auto_now_add=True)

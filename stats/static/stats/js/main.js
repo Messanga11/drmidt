@@ -21,7 +21,7 @@ window.onload = () => {
     if (searchInput.style.width == "200px") {
       search.classList.remove("border");
       searchInput.style.width = 0;
-      searchBtn.innerHTML = `<img src="assets/loupe.svg" alt="loupe">`;
+      searchBtn.innerHTML = `<img src="/static/assets/loupe.svg" alt="loupe">`;
     } else {
       search.classList.add("border");
       searchInput.style.width = "200px";

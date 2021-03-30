@@ -12,11 +12,10 @@ const dataset = [
 const filter = {};
 
 // Checkbox on the sidebar
-const s1CheckBox = document.getElementById("s1");
-const s2CheckBox = document.getElementById("s2");
-const c1CheckBox = document.getElementById("c1");
-const c2CheckBox = document.getElementById("c2");
-let _formatedDatas = {};
+// const s1CheckBox = document.getElementById("s1");
+// const s2CheckBox = document.getElementById("s2");
+// const c1CheckBox = document.getElementById("c1");
+// const c2CheckBox = document.getElementById("c2");
 
 window.addEventListener("DOMContentLoaded", () => {
   fetch("/api/chartstats/?format=json")
@@ -25,14 +24,12 @@ window.addEventListener("DOMContentLoaded", () => {
     .then((_data) => {
       fetch("/api-tds/TDS/?format=json")
         .then((res) => res.json())
-        .then((data) => {
-          _formatedDatas = {
-            semestre1: data.filter((x) => x.Semestre == 1),
-            semestre2: data.filter((x) => x.Semestre == 2),
-            classe1: data.filter((x) => x.class_type == "1st"),
-            classe2: data.filter((x) => x.class_type == "2nd"),
-          };
-          renderAllCharts(data, _data, _formatedDatas);
+        .then((dataJSON) => {
+          const data = dataJSON.map((d) => {
+            d.display = true;
+            return d;
+          });
+          renderAllCharts(data, _data);
           // Filters
           const yearATags = document.querySelectorAll(".yearSelector a");
           for (a of yearATags) {
@@ -50,7 +47,12 @@ window.addEventListener("DOMContentLoaded", () => {
                 dataset[0].gains[dep.department] = Number(dep.money);
                 dataset[0].pertes[dep.department] = Number(dep.recovered);
               });
-              renderAllCharts(filter[e.target.innerText], _data, formatedDatas);
+
+              // s1CheckBox.checked = true;
+              // s2CheckBox.checked = true;
+              // c1CheckBox.checked = true;
+              // c2CheckBox.checked = true;
+              renderAllCharts(filter[e.target.innerText], _data);
               e.target.classList.add("active");
             });
           }
@@ -65,118 +67,152 @@ window.addEventListener("DOMContentLoaded", () => {
 function chartRemover() {
   document.querySelector("#sommesDues").children[0].remove();
   document.querySelector("#repartEc").children[0].remove();
-  document.querySelector("#statSem").children[0].remove();
+  for (
+    let i = 0;
+    i < document.querySelector("#statSem")?.children.length;
+    i++
+  ) {
+    document.querySelector("#statSem")?.children[i].remove();
+  }
   document.querySelector("#fullStats").children[0].remove();
 }
 
-function renderAllCharts(data, _data, formatedDatas = _formatedDatas) {
+function renderAllCharts(data_, _data) {
   // Filtrer les données ici
-  let curData = [];
+  // const cData = data_;
 
-  curData.push(formatedDatas.semestre1.forEach((x) => curData.push(x)));
-  console.log(curData);
+  // d3.selectAll(".yearSelector li div div")
+  //   .select("input")
+  //   .on("change", function () {
+  //     console.log("object");
+  //     s1CheckBox.onchange = function () {
+  //       if (this.checked) {
+  //         toShow = cData.forEach((x) => {
+  //           if (x.Semestre != "1") {
+  //             x["display"] = false;
+  //           } else {
+  //             x["display"] = true;
+  //           }
+  //         });
+  //       } else {
+  //         toShow = cData.forEach((x) => {
+  //           x["display"] = false;
+  //         });
+  //       }
+  //       if (s2CheckBox.checked) {
+  //         toShow = cData.forEach((x) => {
+  //           if (x.display === false) {
+  //             if (x.Semestre !== "2") {
+  //               x["display"] = false;
+  //             } else {
+  //               x["display"] = true;
+  //             }
+  //           }
+  //         });
+  //       }
+  //       if (c1CheckBox.checked) {
+  //         if (s2CheckBox.checked) {
+  //           toShow = cData.forEach((x) => {
+  //             if (x.class_type === "1st" && x.Semestre === "2") {
+  //               x["display"] = true;
+  //             } else {
+  //               if (
+  //                 x.class_type !== "1st" &&
+  //                 x.Semestre != "2" &&
+  //                 x.Semestre != "1"
+  //               ) {
+  //                 x["display"] = false;
+  //               } else {
+  //                 x["display"] = true;
+  //               }
+  //             }
+  //           });
+  //         }
+  //       }
+  //       if (c2CheckBox.checked) {
+  //         if (s2CheckBox.checked) {
+  //           toShow = cData.forEach((x) => {
+  //             if (x.class_type === "2nd" && x.Semestre === "2") {
+  //               x["display"] = true;
+  //             } else {
+  //               if (
+  //                 x.class_type !== "2nd" &&
+  //                 x.Semestre != "2" &&
+  //                 x.Semestre != "1"
+  //               ) {
+  //                 x["display"] = false;
+  //               } else {
+  //                 x["display"] = true;
+  //               }
+  //             }
+  //           });
+  //         }
+  //       }
+  //       chartRemover();
+  //       console.log(cData);
 
-  d3.selectAll(".yearSelector div div")
-    .select("input")
-    .on("change", function () {
-      let _data_;
-      let curData = [];
-      if (
-        s1CheckBox.checked &&
-        !c1CheckBox.checked &&
-        !s2CheckBox.checked &&
-        !c2CheckBox.checked
-      ) {
-        formatedDatas.semestre1.forEach((x) => curData.push(x));
-        _data_ = curData;
-      }
-      if (
-        s2CheckBox.checked &&
-        !s1CheckBox.checked &&
-        !c1CheckBox.checked &&
-        !c2CheckBox.checked
-      ) {
-        formatedDatas.semestre2.forEach((x) => curData.push(x));
-        _data_ = curData;
-      }
-      if (
-        (c1CheckBox.checked &&
-          s1CheckBox.checked &&
-          s2CheckBox.checked &&
-          c2CheckBox.checked) ||
-        !(
-          c1CheckBox.checked &&
-          s1CheckBox.checked &&
-          s2CheckBox.checked &&
-          c2CheckBox.checked
-        )
-      ) {
-        _data_ = data;
-      }
-      if (
-        c1CheckBox.checked &&
-        !s1CheckBox.checked &&
-        !s2CheckBox.checked &&
-        !c2CheckBox.checked
-      ) {
-        _data_ = formatedDatas.classe1;
-      }
-      if (
-        c1CheckBox.checked &&
-        s1CheckBox.checked &&
-        !s2CheckBox.checked &&
-        !c2CheckBox.checked
-      ) {
-        formatedDatas.classe1
-          .filter((x) => x.Semestre == 1)
-          .forEach((x) => curData.push(x));
-        _data_ = curData;
-      }
-      if (
-        c1CheckBox.checked &&
-        !s1CheckBox.checked &&
-        s2CheckBox.checked &&
-        !c2CheckBox.checked
-      ) {
-        formatedDatas.classe1
-          .filter((x) => x.Semestre == 2)
-          .forEach((x) => curData.push(x));
-      }
-      if (
-        !c1CheckBox.checked &&
-        s1CheckBox.checked &&
-        !s2CheckBox.checked &&
-        c2CheckBox.checked
-      ) {
-        formatedDatas.classe2
-          .filter((x) => x.Semestre == 2)
-          .forEach((x) => curData.push(x));
-        _data_ = curData;
-      }
-      if (
-        c1CheckBox.checked &&
-        !s1CheckBox.checked &&
-        !s2CheckBox.checked &&
-        c2CheckBox.checked
-      ) {
-        formatedDatas.classe1.forEach((x) => curData.push(x));
-        formatedDatas.classe2.forEach((x) => curData.push(x));
-        _data_ = curData;
-      }
-      if (
-        !c1CheckBox.checked &&
-        s1CheckBox.checked &&
-        s2CheckBox.checked &&
-        !c2CheckBox.checked
-      ) {
-        formatedDatas.semestre1.forEach((x) => curData.push(x));
-        formatedDatas.semestre2.forEach((x) => curData.push(x));
-        _data_ = curData;
-      }
-      console.log(curData);
-      chartRemover();
-      renderAllCharts(curData, _data);
-    });
+  //       renderAllCharts(cData, _data);
+  //     };
+
+  //     s2CheckBox.onchange = function () {
+  //       if (this.checked) {
+  //         toShow = cData.forEach((x) => {
+  //           if (x.Semestre != "2") {
+  //             x["display"] = false;
+  //           } else {
+  //             x["display"] = true;
+  //           }
+  //         });
+  //       } else {
+  //         toShow = cData.forEach((x) => {
+  //           x["display"] = false;
+  //         });
+  //       }
+  //       chartRemover();
+  //       renderAllCharts(cData, _data);
+  //     };
+
+  //     c1CheckBox.onchange = function () {
+  //       if (this.checked) {
+  //         toShow = cData.forEach((x) => {
+  //           if (x.class_type !== "1st") {
+  //             x["display"] = false;
+  //           } else {
+  //             x["display"] = true;
+  //           }
+  //         });
+  //       } else {
+  //         toShow = cData.forEach((x) => {
+  //           x["display"] = false;
+  //         });
+  //       }
+  //       chartRemover();
+  //       renderAllCharts(cData, _data);
+  //     };
+  //     c2CheckBox.onchange = function () {
+  //       if (this.checked) {
+  //         toShow = cData.forEach((x) => {
+  //           if (x.class_type !== "2nd") {
+  //             x["display"] = false;
+  //           } else {
+  //             x["display"] = true;
+  //           }
+  //         });
+  //       } else {
+  //         toShow = cData.forEach((x) => {
+  //           x["display"] = false;
+  //         });
+  //       }
+  //       chartRemover();
+  //       renderAllCharts(cData, _data);
+  //     };
+  //   });
+
+  const data = [];
+  data_.map((x) => {
+    if (x.display === true) data.push(x);
+  });
+  console.log(data);
 
   // Somme Dues
   _data?.map((dep) => {

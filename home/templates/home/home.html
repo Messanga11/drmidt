@@ -1,0 +1,104 @@
+{% extends 'stats/base.html' %}
+{% load static %}
+{% block _header_img %}
+    <img src="{% static 'images/vitrine-du-cameroun.jpg' %}" alt="Vitrine du Cameroun">
+{% endblock _header_img %}
+{% block content %}
+<section class="actu">
+                <article class="actu__item">
+                    <p class="actu__topAsset">
+                        Actualité
+                    </p>
+                    <div class="actu__text">
+                        <h4>Installation du Ministère des Mines</h4>
+                    <div class="actu__smallTexts">
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque?</p>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque?</p>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque?</p>
+                    </div>
+                    </div>
+                </article>
+                <article class="actu__item">
+                    <p class="actu__topAsset">
+                        Actualité
+                    </p>
+                    <div class="actu__text">
+                        <h4>Installation du Ministère des Mines</h4>
+                        <div class="actu__smallTexts">
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque?</p>
+                        </div>
+                    </div>
+                </article>
+                <article class="actu__item">
+                    <p class="actu__topAsset">
+                        Actualité
+                    </p>
+                    <div class="actu__text">
+                        <h4>Installation du Ministère des Mines</h4>
+                        <div class="actu__smallTexts">
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque?</p>
+                        </div>
+                    </div>
+                </article>
+            </section>
+            <section class="section__typeOne">
+                <h2>Les Potentialités</h2>
+                <div class="articles">
+                    {% for post in posts %}
+                        <article class="section__typeOneItem">
+                            <div class="section__itemImage">
+                                <img src="{% static "images/industrie.jpeg" %}" alt="{{post.title}}">
+                            </div>
+                            <div class="section__itemText">
+                                <h3>{{post.title}}</h3>
+                                <p>{{ post.body|truncatewords:30|linebreaks }}</p>
+                            </div>
+                        </article>
+                    {% endfor %}
+                </div>
+            </section>
+            <section class="section__typeOne">
+                <h2>Blog</h2>
+                <div class="articles">
+                    {% for post in posts %}
+                        <article class="section__typeOneItem">
+                            <div class="section__itemImage">
+                                <img src="{% static "images/industrie.jpeg" %}" alt="{{post.title}}">
+                            </div>
+                            <div class="section__itemText">
+                                <h3>{{post.title}}</h3>
+                                <p>{{ post.body|truncatewords:30|linebreaks }}</p>
+                            </div>
+                        </article>
+                    {% endfor %}
+                </div>
+            </section>
+            <section class="suggestions">
+                <article class="suggestions__left">
+                    <h2>Boite à Suggestions</h2>
+                </article>
+                <article class="suggestions__right">
+                    <form action="#">
+                        <div class="suggestions__rightInputs">
+                            <div class="inputs__left">
+                                <div class="input__form">
+                                    <h6>Email</h6>
+                                    <input type="text" placeholder="Email">
+                                </div>
+                                <div class="input__form">
+                                    <h6>Contact</h6>
+                                    <input type="text" placeholder="Téléphone">
+                                </div>
+                            </div>
+                            <div class="input__textArea">
+                                <h6>Message</h6>
+                                <div class="textarea">
+                                    <textarea type="text" placeholder="Que suggerez-vous ?"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit">Envoyer</button>
+                    </form>
+                </article>
+            </section>
+{% endblock content %}
