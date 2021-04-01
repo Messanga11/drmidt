@@ -1,0 +1,27 @@
+{% load static %}
+{% include "blog/parts/header.html" %}
+    <div class="sections">
+        <div class="section__left">
+        {% block content_left %}
+        {% endblock %}
+        </div>
+        <div class="services__right">
+            <section class="articles">
+                <h3>Articles Récents</h3>
+                <ul>
+                    {% block recent_articles %}
+                    {% endblock %}
+                </ul>
+            </section>
+            <section class="slider"></section>
+            <section class="search">
+                <div class="search__container">
+                    <input type="text" placeholder="Recherche...">
+                    <button>
+                        <img src="{% static "assets/loupe.svg" %}" alt="loupe">
+                    </button>
+                </div>
+            </section>
+        </div>
+    </div>
+{% include 'blog/parts/footer.html' %}

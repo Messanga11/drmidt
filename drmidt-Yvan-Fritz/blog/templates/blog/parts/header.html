@@ -1,0 +1,188 @@
+{% load static %}
+{% url 'home' as home_url %}
+{% url 'stats' as stats_url %}
+{% url 'cadrej' as cadrej_url %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MINMIDT - LITTORAL</title>
+    <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+    {% block link %}{% endblock link %}
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header id="header">
+            <div class="nav__topWrapper">
+                <div class="nav__topContainer">
+                    <p>
+                        <a href="#" class="nav__topLink nav__topLink--active">Français</a> |
+                        <a href="#" class="nav__topLink">English</a>
+                    </p>
+                    <div class="nav__topSocial">
+                        <a herf="#" class="nav__topIcon"><img src="{% static "assets/facebook-letter.png" %}" alt="facebook"></a>
+                        <a herf="#" class="nav__topIcon"><img src="{% static "assets/twitter.svg" %}" alt="twiter"></a>
+                        <a herf="#" class="nav__topIcon"><img src="{% static "assets/instagram_colored.svg" %}" alt="instagram"></a>
+                    </div>
+                </div>
+            </div>
+            <div class="nav__bottom">
+                <div class="logo">
+                    <button id="hamburger">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                    <img src="{% static "assets/logo_blason_cameroun.svg" %}" alt="logo">
+                    <div class="logo__text">
+                        <h6>MINMIDT</h6>
+                        <h6>Délégation Régionale du Littoral</h6>
+                    </div>
+                </div>
+                <div id="navwrapper" class="nav__wrapper nav__mobile">
+                    <ul>
+                        <li class="nav__item nav__item_h">
+                            <a href="{{home_url}}" class="nav__link {% if request.path == home_url %}nav__link--active{% endif %}">Acceuil</a>
+                        </li>
+                        <li class="nav__item nav__item_h">
+                            <a href="" class="nav__link">Services
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14.221" height="9.229" viewBox="0 0 14.221 9.229">
+                                    <path d="M9.111 11.229L2 4.118 4.118 2l4.993 4.993L14.1 2l2.118 2.118z" transform="translate(-2 -2)"/>
+                                </svg>
+                            </a>
+                            <div class="nav__wrapper nav__wrapper--absolute">
+                                <ul>
+                                    <li class="nav__item">
+                                        <a href="services.html" class="nav__link nav__link--active">Organigramme</a>
+                                    </li>
+                                    <li class="nav__item">
+                                        <a href="{% url 'home' %}" class="nav__link">Procédures
+                                        </a>
+                                        <div class="nav__wrapper nav__wrapper--absolute nav__smallSpacing">
+                                            <ul class="nav__vert">
+                                                <li class="nav__item">
+                                                    <a href="{% url 'home' %}" class="nav__link nav__linkNone">Mines</a>
+                                                </li>
+                                                <li class="nav__item">
+                                                    <a href="{% url 'home' %}" class="nav__link nav__linkNone">Industrie
+                                                    </a>
+                                                </li>
+                                                <li class="nav__item">
+                                                    <a href="{% url 'home' %}" class="nav__link nav__linkNone">Developpement<br> Technologique</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                    <li class="nav__item">
+                                        <a href="" class="nav__link">Projects</a>
+                                    </li>
+                                    <li class="nav__item">
+                                        <a href="#" class="nav__link">Activités</a>
+                                        <div class="nav__wrapper nav__wrapper--absolute nav__smallSpacing">
+                                            <ul class="nav__vert">
+                                                <li class="nav__item">
+                                                    <a href="#" class="nav__link nav__linkNone">Tir</a>
+                                                </li>
+                                                <li class="nav__item">
+                                                    <a href="#" class="nav__link nav__linkNone">Mise en Fosse
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                    <li class="nav__item">
+                                        <a href="#" class="nav__link">Plus</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav__item  nav__item_h">
+                            <a href="#" class="nav__link  {% if request.path == stats_url %}nav__link--active{% endif %}">Comité Régional
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14.221" height="9.229" viewBox="0 0 14.221 9.229">
+                                    <path d="M9.111 11.229L2 4.118 4.118 2l4.993 4.993L14.1 2l2.118 2.118z" transform="translate(-2 -2)"/>
+                                </svg>
+                            </a>
+                            <div class="nav__wrapper nav__wrapper--absolute">
+                                <ul>
+                                    <li class="nav__item">
+                                        <a href="comite.html" class="nav__link">Organigramme</a>
+                                    </li>
+                                    <li class="nav__item">
+                                        <a href="#" class="nav__link">Planning
+                                        </a>
+                                        <div class="nav__wrapper nav__wrapper--absolute nav__smallSpacing">
+                                            <ul class="nav__vert">
+                                                <li class="nav__item">
+                                                    <a href="#" class="nav__link nav__linkNone">SEMESTRE 1</a>
+                                                </li>
+                                                <li class="nav__item">
+                                                    <a href="#" class="nav__link nav__linkNone">SEMESTRE 2</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                    <li class="nav__item">
+                                        <a href="#" class="nav__link">Actualité</a>
+                                        <div class="nav__wrapper nav__wrapper--absolute nav__smallSpacing">
+                                            <ul class="nav__vert">
+                                                <li class="nav__item">
+                                                    <a href="#" class="nav__link nav__linkNone">Lancement</a>
+                                                </li>
+                                                <li class="nav__item">
+                                                    <a href="#" class="nav__link nav__linkNone">Inspection
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                    <li class="nav__item">
+                                        <a href="{{stats_url}}" class="nav__link  {% if request.path == stats_url %}nav__link--active{% endif %}">Statistiques</a>
+                                    </li>
+                                    <li class="nav__item">
+                                        <a href="#" class="nav__link" style="display: inline-block;max-width: 100px;">Documents Exigibles</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav__item  nav__item_h">
+                            <a href="#" class="nav__link {% if request.path == cadrej_url %}nav__link--active{% endif %}">Cadre Juridique</a>
+                            <div class="nav__wrapper nav__wrapper--absolute nav__smallSpacing">
+                                <ul class="nav__vert">
+                                    <li class="nav__item">
+                                        <a href="{{cadrej_url}}" class="nav__link nav__linkNone">TEXTES LÉGISLATIFS</a>
+                                    </li>
+                                    <li class="nav__item">
+                                        <a href="#" class="nav__link nav__linkNone">TEXTES RÉGLÉMENTAIRES
+                                        </a>
+                                    </li>
+                                    <li class="nav__item">
+                                        <a href="#" class="nav__link nav__linkNone">TEXTES DE NOMINATION</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="search__container">
+                    <div class="search">
+                        <input type="text" placeholder="Rechercher">
+                        <button id="searchBtn">
+                            <img src="{% static "assets/loupe.svg" %}" alt="loupe">
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="banner" style="background-image: url({% static "images/vitrine-du-cameroun.jpeg" %}); background-position: center;">
+                {% block header_img %}{% endblock header_img %}
+                <div class="overlay" style="position: absolute;background-color: rgba(0, 0, 0, 0.3); top: 0; left: 0; bottom: 0; right: 0; z-index: 1"></div>
+                <div class="banner__content">
+                    <h2>Vitrine du Cameroun</h2>
+                    <button>En Savoir Plus</button>
+                </div>
+            </div>
+        </header>
+        <main>

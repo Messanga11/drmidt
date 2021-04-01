@@ -1,0 +1,125 @@
+{% extends 'stats/base.html' %}
+{% load static %}
+{% block _header_img %}
+    <img src="{% static 'images/vitrine-du-cameroun.jpg' %}" alt="Vitrine du Cameroun">
+{% endblock _header_img %}
+{% block content %}
+<section class="actu">
+    <article class="actu__item">
+        <a href="/blog/?cat=actualite">
+            <p class="actu__topAsset">
+                Actualité
+            </p>
+        </a>
+        <img src="/static/images/{{post_actu.thumbnail}}" alt="{{post_actu.title}}">
+        <div class="actu__text">
+            <a href="{{ post_actu.get_absolute_url }}">
+                <h4>{{post_actu.title}}</h4>
+                <div class="actu__smallTexts">
+                    <p>{{ post_actu.body|truncatewords:10|linebreaks }}</p>
+                </div>
+            </a>
+        </div>
+        </article>
+        <article class="actu__item">
+            <a href="/blog/?cat=magazine">
+                <p class="actu__topAsset">
+                    Magzi
+                </p>
+            </a>
+            <img src="/static/images/{{post_magzi.thumbnail}}" alt="{{post_magzi.title}}">
+            <div class="actu__text">
+                <a href="{{ post_magzi.get_absolute_url }}">
+                    <h4>{{post_magzi.title}}</h4>
+                    <div class="actu__smallTexts">
+                        <p>{{ post_magzi.body|truncatewords:10|linebreaks }}</p>
+                    </div>
+                </a>
+                </div>
+        </article>
+        <article class="actu__item">
+            <a href="/blog/?cat=annouce">
+                <p class="actu__topAsset">
+                    Anor
+                </p>
+            </a>
+            <img src="/static/images/{{post_anor.thumbnail}}" alt="{{post_anor.title}}">
+            <div class="actu__text">
+                    <a href="{{ post_anor.get_absolute_url }}">
+                    <h4>{{post_anor.title}}</h4>
+                        <div class="actu__smallTexts">
+                            <p>{{ post_anor.body|truncatewords:10|linebreaks }}</p>
+                        </div>
+                    </a>
+                </div>
+        </article>
+    </section>
+    <section class="section__typeOne">
+        <a href="/blog/potentialites/"><h2>Les Potentialités</h2></a>
+        <div class="articles">
+            {% for post in potentialites_posts %}
+                {% if forloop.counter0 < 3 %}
+                    <a href="{{ post.get_absolute_url }}">
+                        <article class="section__typeOneItem">
+                            <div class="section__itemImage">
+                                <img src="/static/images/{{post.thumbnail}}" alt="{{post.title}}">
+                            </div>
+                            <div class="section__itemText">
+                                <h3>{{post.title}}</h3>
+                                <p>{{ post.body|truncatewords:30|linebreaks }}</p>
+                            </div>
+                        </article>
+                    </a>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </section>
+    <section class="section__typeOne">
+        <a href="/blog"><h2>Blog</h2></a>
+        <div class="articles">
+            {% for post in blog_posts %}
+                {% if forloop.counter0 < 3 %}
+                    <a href="{{ post.get_absolute_url }}">
+                        <article class="section__typeOneItem">
+                            <div class="section__itemImage">
+                                <img src="/static/images/{{post.thumbnail}}" alt="{{post.title}}">
+                            </div>
+                            <div class="section__itemText">
+                                <h3>{{post.title}}</h3>
+                                <p>{{ post.body|truncatewords:30|linebreaks }}</p>
+                            </div>
+                        </article>
+                    </a>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </section>
+    <section class="suggestions">
+        <article class="suggestions__left">
+            <h2>Boite à Suggestions</h2>
+        </article>
+        <article class="suggestions__right">
+            <form action="#">
+                <div class="suggestions__rightInputs">
+                    <div class="inputs__left">
+                        <div class="input__form">
+                            <h6>Email</h6>
+                            <input type="text" placeholder="Email">
+                        </div>
+                        <div class="input__form">
+                            <h6>Contact</h6>
+                            <input type="text" placeholder="Téléphone">
+                        </div>
+                    </div>
+                    <div class="input__textArea">
+                        <h6>Message</h6>
+                        <div class="textarea">
+                            <textarea type="text" placeholder="Que suggerez-vous ?"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit">Envoyer</button>
+            </form>
+        </article>
+    </section>
+{% endblock content %}

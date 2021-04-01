@@ -1,0 +1,6 @@
+{% include 'blog/parts/header.html' %}
+{% load static %}
+    {% block link %}<link rel="stylesheet" href="{% static 'stats/css/style.css' %}">{% endblock link %}
+    {% block content %}{% endblock content %}
+    {% block scripts %}{% endblock scripts %}
+{% include 'blog/parts/footer.html' %}

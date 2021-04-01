@@ -1,0 +1,207 @@
+{% extends 'stats/base.html' %}
+{% load static %}
+{% block content %}
+    <div class="wrapper">
+                <section class="first-line">
+                    <div class="mainStats line">
+                        <div class="card-stat" id ="sommesDues">
+                        </div>
+                        <div class="card-stat">
+                            <div class="card-header">
+                            </div>
+                            <div id="map" class="card-body">
+                                <div class="region-data">
+                                    <h3></h3>
+                                    <span class="val"></span>
+                                    <p style="padding-bottom: 10px;"><strong>Etablissements inspectés</strong></p>
+                                    <p>Il s'agit du nombre d'établissement inspectés pour le compte de <strong>l'année en cours.</strong></p>
+                                </div>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 320" width="400" height="320" id="map-svg">
+                                <defs><style>.cls-1{font-size:12px;font-family:AvenirLTPro-BlackOblique, Avenir LT Pro;font-weight:800;font-style:oblique;}.cls-2{fill:#ff957c;}.cls-3{fill:#fbff0d;}.cls-4{fill:#a7c5ff;}.cls-5{fill:#00d00b;}</style></defs><g id="Calque_2" data-name="Calque 2" style="
+                                transform: translate(10px, 30px);"><g id="Calque_3" data-name="Calque 3"><path id="wouri" class="cls-2" d="M157.93,203.11l3-2,3.08-.41,2.9,0,2.25.28,1-2.45.63-1.76.44-2.75,2.4-1.64,1.25-1.33,2.07-2.21,1.36-2.5.48-2.76-1.32-.6h-2.16c0-1.44.24-4.08.24-4.08l1.92-1.44,1.68-1.2H184l1.68-3.12,1.55-.82.73-4.1v-2l-.81-.35-2-.85-.83-.77-1.28-1.2-1.11-1L181,161l-1.3-1.58.84-1.92,1.79-1.28-1.19-2.44v-1.44l.6-1.68.24-2.28v-2s-1-.72-1-1.08a6.42,6.42,0,0,0-.72-1.56l-.84-.83a4.32,4.32,0,0,0-.81-.31l-2.53-1-1.34,1.31h-1l-.54,1.31a6.9,6.9,0,0,0-.78,1.2c-.12.36-.6,1.56-.6,1.56l-.36,1.8-1.65,1.16-.6.33-2,.43-.73-.21-.36.44-1.31,2.17-2.28-.12-1.8-.72a3.25,3.25,0,0,1-1.44-.48,20.65,20.65,0,0,1-1.44-2.52l-3,1.2L153.37,153v1.68l-1.55,1.44-.49,1.3-.27.63-.57,1.94s.32-.05-.16.43a4.06,4.06,0,0,0-.8,2.18c0,.48-.6,1-1,1.68a11.42,11.42,0,0,1-1.32,1.8l-3.24-.48s1.8-.24-.48-.84-1.8-.84-3.12-.84-3.6.24-3.6.24l-2,1.68L133,167l-1,2.16-.84,1.44-.48,1.75-1.44.77L127,174.67l-1.44.84-1,1.56,2.4.12v1.44l-.48,1.44v4.08l2.16.12h3.12l1.32-1.8L135,182l1.56-.24,4.2.48,1.44.72,1.68,1.92,1.56,2.76-1.08,2.28.36,1.44,1.32,2,1.8,2,1.32,1.56,1.92,1.68L154,199l2.28,2Z"/><path id="sanaga_maratime" data-name="sanaga maratime" class="cls-3" d="M157.93,203.11l1.8,2.16a27,27,0,0,0,.84,3c.48,1.32,1.2,3,1.2,3a11.38,11.38,0,0,0,0,2c.12.36,1.68,3.48,1.68,3.48v8.4l2.16,1.08a24.24,24.24,0,0,1,2.76,3.12,27,27,0,0,0,2.4,2.16l3,2.16,2.28,3,2.28,1.8s1.44,2.76,2.4,2.76,2,1.32,2,1.32l1.8,1.68,2.76,1.56,2.76,1,.72,2,3.84,1,1.44,1.2,2.88,1.44,4,.6,2.64-1.2,1-2.16,1.92-1.2,1.68-2,.6-4.8L213,240l1-8.4-.72-5.28.72-4.44,1.32-2.64,2.88-.36,2.88-1.56h6.57l2.19,1a6.42,6.42,0,0,1,.72,1.56c0,.36,1.56,2.28,1.56,2.64v1.8l.72,1.32h1.8l2-2.4,1.92-1.44v-3.36s2-.6,2.4-.72a8.22,8.22,0,0,0,1.68-1.8c.36-.48,1.92-3.24,1.92-3.24l-.48-5.16,1.92-1.2,1.92-3.12V198l-3-2.88-.12-3.6,1.68-1.8,3.48-2.16,3.24-1.44s1.8,1.8,2,2.16,4.92,1,4.92,1h8.76l1.56,2.28,2.52,2.88,1.92,2.28a35.82,35.82,0,0,0,3.6,0,22.27,22.27,0,0,0,2.16-1.44v-7.56l2.76-3,1-5.28v-4.2l-3.48-2.52-.6-3.84,2.88-2.52,2.88-1.8,1.56-4.2,2.88-1.92,5.4-1.32h1.8l2-3.36,3.48-.84,1.56-2.64s5.28.12,5.64,0,7.68,1.2,7.68,1.2l6.24-2.88,2.28-3.72,1.56-3.6h5v-3.48L331.81,133l-1.92-2.4-4-2.76-4.44-1L321,122l-3.6-2.88-.72-6.72-3.24-4-2.76-2.76,1.44-3.6a11.64,11.64,0,0,0,3.12-1.68c.6-.72,1.8-5.52,1.8-5.52l-1.92-4.8-8.4-1L303,88h-5.4l-.6,5.76-1.56,5-1.56,5.76-4.08-1.2-4.2,1.56-9,.12,1.08,2.28-3.5,4.62a10.9,10.9,0,0,1-2.38.78c-.6,0-5.52.72-5.52.72l-2.52,1.68,1.68,4,1.2,3.36s-1.8.12-2.16.12-7.4-.74-7.4-.74l-3,1.94-4,7.92.89,2.45.55,2.11-1.32,1.92-3.05,2.11-1.57,5.81,2.58,1.56,1.68,3.24L247.93,152l-3.74-1.34-3.05,2.18-2.63,1.48a36.35,36.35,0,0,1-3.54,1.4c-.36,0-2-2.88-2.28-3.12a9.93,9.93,0,0,0-2.5-.59l-2.57-.61-2.68,2.34-1.59.37-2.54.17-1.08-5h-3.36L212.53,152l-2.84,2.7-3.66,2.2-2.62-2.83-5.28-.27-4.2-.52-3.24-.68-5.16,2-4.44-.84-1.45,5.78,2.05,2.26,3.48,3.24,2.76,1.2-.4,4.26-1.88,2.7-1.44,2.67c-1.32-.27-5,.45-5,.45L175.38,179l0,4,3.48.6-.48,2.76-1.44,2.64L174.13,192l-2.88,2.16-.48,3-1.56,4s-2.64-.36-3.12-.36-4.2-.12-4.2-.12l-1.92,1.2Z"/><path id="Moungo" class="cls-4" d="M149.57,162.36,144.85,159V147.79l-1.44-1.62H140l-2.7,1.8-1.8-.72-5-2.16v-13l2.34-2.34,2.34-2.34,1.08-2.7,2.34-1.8.9-5.76-2.34-6.12-1.26-4.86,3.6-3.24,2.52-2.34,1.62-3.42,5.76-3.78h1.26l.72-5.4.9-1.62h2.88l4.32-6.66.9-10.8,2-1.44V63.19l3.42-1.8L168.07,60V57.61L167,56l.36-8.64h2.88l3.42-2.88a33.28,33.28,0,0,0,1.62-4.14V37.09l-4.68-6.84-4.14-4.86-2.34-1.8L163,21.43l.36-4.14.36-2.88h5.94l2-1.44,2.7-2.16,2.34-2,3.78-.72v3.78s1.26,1.26,1.8.9,3.6,0,3.6,0l4.5-.18,1.44-.72,1.8,4.86,3.06,3.06,2.88.54s1.62,3.78,1.44,4.32-.9,2.52-.9,2.52l.91,2.34,1.07,7.56v2.16l2,2.16,4.86,3.24,2.88,1.44-.72,4.14-2.7,2.34L205,56.35l-3.24.36-1.08,2.16-.36,3.6.54,4.14.9,2.7,1.62,2.7-1.44,2.7L200.11,76l-3.42,3.6L194.53,83l-2.16,2.7L190.21,87l-3.78-3.78-2.34-.72-1.62-2.16-1.62,2.52-.18,1.89-2.34,1.71-2.52.72-.36,3.24-1.26,1.8-.9,5.4.54,3.78,1.26,2.88,1.44,4.14-.18,3.6-.18,4.32,1.26.9.36,3.42-.54,5.42s-.54,1.24-1.08,2.68l-.54,1.44-.36,3.42.72,4.86.54,2.16-1.08,2.29-1.34.27-1.17,1.43a18.46,18.46,0,0,0-.82,1.69,5.83,5.83,0,0,0-.12,2.06l-1,.95-2.24,1.22-2.6.43-1.42,2.66-2.89-.88-1.3-.24-2-1.26-.59-1.62-1.33.17-1.67.67L153.37,153v1.68l-1.32,1.62-.9,2Z"/><path id="_Nkam" data-name="&lt;Nkam" class="cls-5" d="M176.07,141.57l3.34,1.31,1.56,2.39,1,3.12-.88,3.58,0,1.82,4.44.84,3.73-.57,1.43-1.47,4.56.95,3.46.52h4.7l2.62,2.83,4.53-2.73,2-2.17,3.84-2.76h3.36l1.08,5,2.54-.17,2.59-.56,1.68-2.15,5,1.19,2.28,3.25,2.13-.75,2.75-1.45,1.75-1.06,2.64-1.92,3.74,1.34,1.92-1.08-1.68-3.24-2.58-1.56.8-2.7.77-3.11.77-.55,2.28-1.56,1.32-1.92-.26-1.17-.58-1.9-.6-1.49,1.18-2.36.91-1.82,1.73-3.45,2.16-1.3s-.26-.32,1.68-.84c2.21.15,3.32.32,3.32.32s2.8.28,3.17.37a18,18,0,0,0,2.47-.15l-1.26-3.37-1.2-2.84-.48-1.12,2.85-1,4-.72,3.12-1.32s2.74-1,2.81-1.42,1.15-3.38,1.15-3.38l-1.08-2.28a7.28,7.28,0,0,0-2.64-.84h-3.48l-4.08,1.2-3,2-2.76-1s-2-2.64-2.4-2.88a10.45,10.45,0,0,0-2.28-1.2h-1a25.8,25.8,0,0,0-3.84.6s-1.2,0-1.2-.6a32.55,32.55,0,0,1,.6-3.24l2-2.4.36-2.88,1.44-3,3.84-2h3.36l-1-2.28a13.86,13.86,0,0,0-1.8-1.56c-.48-.24-.84-.24-1.08-.72a9.78,9.78,0,0,1-.48-1.68l1.32-1.44,1-1.32,1.08-1.56-.48-1.8s-.72-1-1-1.32a2.13,2.13,0,0,0-1.68-1,18.12,18.12,0,0,0-4.2,1c-.36.24-2.76,2.16-2.76,2.16l-2.64,1.32-1.68,1.68-2,.84-2.52.12a8.75,8.75,0,0,1-.84-2.4,14.48,14.48,0,0,1,.84-2.88l3.12-4.68,3.24-2.52,1-2.13,2-.45L253.48,65l2-2.25,3-1.8s2-1.53,2-1.8-1.8-3.51-1.8-3.51-1.89-1.44-2.16-1.71-2.43-1.8-2.43-1.8l-.81-1.62-.54-2.43-1.8-1.44-1.71,1.08-.45.9a12.84,12.84,0,0,0-1.17-1.26,19,19,0,0,0-2-.72l-.45-1.53-.72-1.17-.9-.9-.81-.81-.27-2a4.82,4.82,0,0,1,0-1.62,21.39,21.39,0,0,0,.72-2.34L242.68,34,242,32.77,240.52,32l-1.71-.45h-3.33l-.54.54a13.16,13.16,0,0,0-.81,1.35c-.09.27-.81,1.8-.81,1.8l-1.62,1.44-1.53.54-1.08-1.44L228.37,34l-1.49.36H224.5l-1.62,1.17-1.44,1.53-1,1.62,1.71,1.35,1.71.81-.18,1.44s-1.62.45-1.62.81-.18,3.06-.18,3.42a12.42,12.42,0,0,1-.81,2.07.59.59,0,0,0-.81.27c-.27.54-1.89,1.35-1.89,1.35l-.63,1.89-1.26.72-.27,1.26-1.62-1.53L213.88,51l-1.17-1.17-2.31,1-1.18,1-1.77,1.76-.74.81a4.37,4.37,0,0,0-.3,1.21h-3l-1.71.63s.9.18-.18.81-1.07,3.49-1.07,3.49l.33,5.92.7,2.18.22.65,1,1.68-.13,2.4a20.11,20.11,0,0,1-1.47,1.86c-.27.19-2.56,2.33-2.56,2.33l-2.45,2.87-2.41,1.91-.37,2.11-1.75,1.67-2.15,0L188,84.7l-1.71-2.25s-2,.72-1.87.09-1.19-2.25-1.19-2.25l-2,.9-1.35,2.52.06,1.54-2.85,1-1.3,1.25-1.13,2.35-.53,2.82-.82,4.92.27,1.9.53,2.48.55,2.46.93,1.19.51,4-.36,2.61v3.69l1.74,1.5-.39,2.73-.81,4.26-.15,4-.48,1.71s-.51,2.82-.51,3.45.8,3.32.46,4.06S176.07,141.57,176.07,141.57Z"/></g></g></svg>
+                                <!-- <rect class="cls-5" x="264.08" width="27.22" height="27.22"/><rect class="cls-3" x="306.03" y="214.08" width="27.22" height="27.22"/><rect class="cls-2" x="77.7" y="195.36" width="27.22" height="27.22"/><rect class="cls-4" x="73.04" y="64.66" width="27.22" height="27.22"/> -->
+                            </div>
+                        </div>
+                        <div class="card-stat" id="repartEc">
+                        </div>
+                        <div class="card-stat optional-card">
+                            <h1>LITTORAL</h1>
+                        </div>
+                    </div>
+                    <div class="yearSelector">
+                        <button id="annesBtn">Années<div class="carret-down-2"></button>
+                        <ul>
+                            <li>
+                                <a href="#2021">2021</a>
+                            </li>
+                            <li>
+                                <a href="#2020">2020</a>
+                            </li>
+                            <li>
+                                <a href="#2019">2019</a>
+                            </li>
+                            <li>
+                                <a href="#2018">2018</a>
+                            </li>
+                            <li>
+                                <a href="#2017">2017</a>
+                            </li>
+                            {% comment %} <li>
+                                <div style="text-align: left; padding: 5px; font-size: 13px">
+                                    <div>
+                                        <input type="checkbox" name="s1" id="s1">
+                                        <label for="s1">Semestre 1</label>
+                                    </div>
+                                    <div>
+                                        <input type="checkbox" name="s2" id="s2">
+                                        <label for="s2">Semestre 2</label>
+                                    <div>
+                                        <input type="checkbox" name="c1" id="c1">
+                                        <label for="c1">1ere Classes</label>
+                                    </div>
+                                    <div>
+                                        <input type="checkbox" name="c2" id="c2">
+                                        <label for="c2">2e Classes</label>
+                                    </div>
+                                </div>
+                            </li> {% endcomment %}
+                        </ul>
+                    </div>
+                </section>
+                <section class="second-line">
+                <div class="table">
+                    <div class="row-head">
+                        <div class="col">Semestre</div>
+                        <div class="col">Classes</div>
+                        <div class="col">Nbre EC en activité</div>
+                        <div class="col">Nbre EC nouveaux</div>
+                        <div class="col">Nbre EC programmés</div>
+                        <div class="col">Nbre EC inspectés</div>
+                        <div class="col">Nbre EC déclarés</div>
+                        <div class="col">Nbre AP en activité</div>
+                        <div class="col">ESD générés EC</div>
+                        <div class="col">ESD générés AP</div>
+                    </div>
+                    <div id="statSem">
+                    </div>
+                </div>
+                <div class="regionSelector yearSelector">
+                        <button id="">Sélections <div class="carret-down-2"></button>
+                        <ul>
+                            <li>
+                                <a href="#all"><h2>Région</h2></a>
+                            </li>
+                            <li>
+                                <a href="#wouri">WOURI</a>
+                            </li>
+                            <li>
+                                <a href="#nkam">NKAM</a>
+                            </li>
+                            <li>
+                                <a href="#sanagamaritime">SANAGA MARETIME</a>
+                            </li>
+                            <li>
+                                <a href="#moungo">MOUNGO</a>
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+                <section class="third-line">
+                <div class="recap">
+                    <div class="recapEl">
+                        <h2>Première Classe</h2>
+                        <h4>(en taux)</h4>
+                        <div class="bottom">
+                            <div class="el">
+                                <small>Nombre EC</small>
+                                <h2>75<div class="carret-up"></div></h2>
+                                <div id="line1"></div>
+                            </div>
+                            <div class="el">
+                                <small>Couverture Inspections</small>
+                                <h2>75<div class="carret-down"></div></h2>
+                                <div id="line2"></div>
+                            </div>
+                            <div class="el">
+                                <small>Conformité</small>
+                                <h2>75<div class="carret-down"></div></h2>
+                                <div id="line3"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="recapEl">
+                        <h2>Deuxième Classe</h2>
+                        <h4>(en taux)</h4>
+                        <div class="bottom">
+                            <div class="el">
+                                <small>Nombre EC</small>
+                                <h2>0<div class="carret-up"></div></h2>
+                                <div id="line4"></div>
+                            </div>
+                            <div class="el">
+                                <small>Couverture Inspections</small>
+                                <h2>75<div class="carret-up"></div></h2>
+                                <div id="line5"></div>
+                            </div>
+                            <div class="el">
+                                <small>Conformité</small>
+                                <h2>75<div class="carret-down"></div></h2>
+                                <div id="line6"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                    <div class="show-link">
+                        <a href="#">Voir tout</a>
+                    </div>
+                </section>
+                <h2 class="fs-title">Evolution des Recettes par semestre depuis 2017</h2>
+                <section class="last-line">
+                    <div class="fullStats-wrapper">
+                        <div id="fullStats"></div>
+                        <table>
+                            <tr style="font-weight: bold; font-size: 13x">
+                                <td id="ff_td"></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: left;"><div class="mini-box" style="background-color: #265b5;"></div>&nbsp;&nbsp;Recettes Générées</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: left;"><div class="mini-box" style="background-color: #d99827"></div>&nbsp;&nbsp;Recettes Recouvrées</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="show-link">
+                        <a href="#">Voir tout</a>
+                    </div>
+                </section>
+            </div>
+{% endblock content %}
+
+{% block scripts %}
+    <script src="{% static 'stats/js/d3.min.js' %}"></script>
+    <script src="{% static 'stats/js/charts/sommeDuesChart.js' %}"></script>
+    <script src="{% static 'stats/js/charts/fullStatsChart.js' %}"></script>
+    <script src="{% static 'stats/js/charts/miniLines.js' %}"></script>
+    <script src="{% static 'stats/js/charts/repartECChart.js' %}"></script>
+    <script src="{% static 'stats/js/charts/datas.js' %}"></script>
+    <script src="{% static 'stats/js/charts/script.js' %}"></script>
+{% endblock scripts %}

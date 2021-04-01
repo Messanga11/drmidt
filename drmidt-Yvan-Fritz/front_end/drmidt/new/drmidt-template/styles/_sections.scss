@@ -1,0 +1,119 @@
+.sections {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.section__left {
+    flex: 0.73;
+    section {
+        margin: 40px 0;
+        padding: 26px 12px 17px 7px;
+        box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+        background-color: $bgSecondary;
+        h2, h3 {
+            color: $bannerColor;
+        }
+    }
+}
+
+.services__right {
+    flex: 0.27;
+    padding: 0 10px;
+    h3 {
+        text-align: center;
+        font-size: 28px;
+        margin-bottom: 10px;
+    }
+    ul {
+        list-style: none;
+        padding: 0;
+        width: 100%;
+        li {
+            margin-bottom: 10px;
+            padding-bottom: 7px;
+            border-bottom: solid 2px #70707080;
+            color: $textLight;
+            font-size: $DefaultTextSize;
+        }
+    }
+    .slider {
+        width: 100%;
+        height: 300px;
+        background-color: $bgSecondary; 
+        margin: 20px 0;
+        box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+    }
+    .search {
+        .search__container {
+            display: flex;
+            background-color: $bgSecondary;
+            padding: 5px;
+            box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
+        }
+        input {
+            flex: 1;
+            background-color: transparent;
+            border: none;
+            outline-width: 0;
+            padding: 10px;
+        }
+        button {
+            background-color: transparent;
+            border: none;
+            outline-width: 0;
+            cursor: pointer;
+        }
+    }
+}
+
+.member {
+    display: flex;
+    flex-direction: column;
+    max-width: 340px;
+    align-items: center;
+    text-align: center;
+    h6 {
+        font-size: 1.4rem;
+    }
+    img {
+        object-fit: cover;
+        border-radius: 999px;
+        height: 200px;
+        width: 200px;
+        margin: 35px 0;
+    }
+}
+
+@media screen and (max-width: 1223px) {
+    .section__left {
+        flex: 1;
+    }
+
+    .services__right {
+        flex: 1;
+    }
+}
+
+@media screen and (max-width: 795px) {
+    .member {
+        img {
+            height: 100px;
+            width: 100px;
+        }
+    }
+}
+
+@media screen and (max-width: 550px) {
+    .section__left {
+        width: 100%;
+    }
+
+    .member {
+        img {
+            height: 60px;
+            width: 60px;
+        }
+    }
+}
