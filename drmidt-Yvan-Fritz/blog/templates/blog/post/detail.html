@@ -19,7 +19,7 @@
 			<div class="card__category"><a href="#">{{ post.category }}</a></div>
 			<div class="card__title"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></div>
 			<div class="card__post">
-				<p>{{ post.body }}</p>
+				<p>{{ post.body|safe }}</p>
 			</div>
 		</div>
 	</article>

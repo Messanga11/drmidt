@@ -14,7 +14,7 @@ def post_list(request):
                   {'posts': posts, "title": "Articles de Blog"})
 
 def post_list_potentatialites(request):
-    posts = Post.published.exclude(category="blog_Post").exclude(category="annouce").exclude(category="magazine").exclude(category="actualite")
+    posts = Post.published.exclude(category="blog_Post").exclude(category="annouce").exclude(category="magazine").exclude(category="actualite").exclude(category="inspections")
     return render(request,
                   'blog/post/list.html',
                   {'posts': posts, "title": "Potentialités"})

@@ -2,6 +2,11 @@
 {% url 'home' as home_url %}
 {% url 'stats' as stats_url %}
 {% url 'cadrej' as cadrej_url %}
+{% url 'cadrej_leg' as cadrej_leg_url %}
+{% url 'cadrej_reg' as cadrej_reg_url %}
+{% url 'cadrej_nom' as cadrej_nom_url %}
+{% url 'actualite' as actualite_url %}
+{% url 'projets' as projets_url %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,8 +16,7 @@
     <title>MINMIDT - LITTORAL</title>
     <link rel="stylesheet" href="{% static 'css/blog.css' %}">
     {% block link %}{% endblock link %}
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<!-- <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet"> -->
 </head>
 <body>
     <div class="container">
@@ -49,7 +53,7 @@
                             <a href="{{home_url}}" class="nav__link {% if request.path == home_url %}nav__link--active{% endif %}">Acceuil</a>
                         </li>
                         <li class="nav__item nav__item_h">
-                            <a href="" class="nav__link">Services
+                            <a href="/services" class="nav__link {% if request.path == "/services/" or request.path == projets_url %}nav__link--active{% endif %}">Services
                                 <svg xmlns="http://www.w3.org/2000/svg" width="14.221" height="9.229" viewBox="0 0 14.221 9.229">
                                     <path d="M9.111 11.229L2 4.118 4.118 2l4.993 4.993L14.1 2l2.118 2.118z" transform="translate(-2 -2)"/>
                                 </svg>
@@ -57,28 +61,14 @@
                             <div class="nav__wrapper nav__wrapper--absolute">
                                 <ul>
                                     <li class="nav__item">
-                                        <a href="services.html" class="nav__link nav__link--active">Organigramme</a>
+                                        <a href="/services" class="nav__link {% if request.path == "/services/" %}nav__link--active{% endif %}">Organigramme</a>
                                     </li>
                                     <li class="nav__item">
-                                        <a href="{% url 'home' %}" class="nav__link">Procédures
+                                        <a href="/static/images/pdf/guide_usager.pdf" class="nav__link">Procédures
                                         </a>
-                                        <div class="nav__wrapper nav__wrapper--absolute nav__smallSpacing">
-                                            <ul class="nav__vert">
-                                                <li class="nav__item">
-                                                    <a href="{% url 'home' %}" class="nav__link nav__linkNone">Mines</a>
-                                                </li>
-                                                <li class="nav__item">
-                                                    <a href="{% url 'home' %}" class="nav__link nav__linkNone">Industrie
-                                                    </a>
-                                                </li>
-                                                <li class="nav__item">
-                                                    <a href="{% url 'home' %}" class="nav__link nav__linkNone">Developpement<br> Technologique</a>
-                                                </li>
-                                            </ul>
-                                        </div>
                                     </li>
                                     <li class="nav__item">
-                                        <a href="" class="nav__link">Projects</a>
+                                        <a href="{{projets_url}}" class="nav__link  {% if request.path == projets_url %}nav__link--active{% endif %}">Projects</a>
                                     </li>
                                     <li class="nav__item">
                                         <a href="#" class="nav__link">Activités</a>
@@ -101,7 +91,7 @@
                             </div>
                         </li>
                         <li class="nav__item  nav__item_h">
-                            <a href="#" class="nav__link  {% if request.path == stats_url %}nav__link--active{% endif %}">Comité Régional
+                            <a href="/comite" class="nav__link  {% if request.path == "/comite/" or request.path == stats_url or request.path == actualite_url %}nav__link--active{% endif %}">Comité Régional
                                 <svg xmlns="http://www.w3.org/2000/svg" width="14.221" height="9.229" viewBox="0 0 14.221 9.229">
                                     <path d="M9.111 11.229L2 4.118 4.118 2l4.993 4.993L14.1 2l2.118 2.118z" transform="translate(-2 -2)"/>
                                 </svg>
@@ -109,7 +99,7 @@
                             <div class="nav__wrapper nav__wrapper--absolute">
                                 <ul>
                                     <li class="nav__item">
-                                        <a href="comite.html" class="nav__link">Organigramme</a>
+                                        <a href="/comite" class="nav__link {% if request.path == "/comite/" %}nav__link--active{% endif %}">Organigramme</a>
                                     </li>
                                     <li class="nav__item">
                                         <a href="#" class="nav__link">Planning
@@ -126,18 +116,7 @@
                                         </div>
                                     </li>
                                     <li class="nav__item">
-                                        <a href="#" class="nav__link">Actualité</a>
-                                        <div class="nav__wrapper nav__wrapper--absolute nav__smallSpacing">
-                                            <ul class="nav__vert">
-                                                <li class="nav__item">
-                                                    <a href="#" class="nav__link nav__linkNone">Lancement</a>
-                                                </li>
-                                                <li class="nav__item">
-                                                    <a href="#" class="nav__link nav__linkNone">Inspection
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
+                                        <a href={{actualite_url}} class="nav__link {% if request.path == actualite_url %}nav__link--active{% endif %}">Actualité</a>
                                     </li>
                                     <li class="nav__item">
                                         <a href="{{stats_url}}" class="nav__link  {% if request.path == stats_url %}nav__link--active{% endif %}">Statistiques</a>
@@ -149,18 +128,18 @@
                             </div>
                         </li>
                         <li class="nav__item  nav__item_h">
-                            <a href="#" class="nav__link {% if request.path == cadrej_url %}nav__link--active{% endif %}">Cadre Juridique</a>
+                            <a href="{{cadrej_url}}" class="nav__link {% if request.path == cadrej_url or request.path == cadrej_leg_url or request.path == cadrej_reg_url or request.path == cadrej_nom_url %}nav__link--active{% endif %}">Cadre Juridique</a>
                             <div class="nav__wrapper nav__wrapper--absolute nav__smallSpacing">
                                 <ul class="nav__vert">
                                     <li class="nav__item">
-                                        <a href="{{cadrej_url}}" class="nav__link nav__linkNone">TEXTES LÉGISLATIFS</a>
+                                        <a href="{{cadrej_leg_url}}" class="nav__link nav__linkNone {% if request.path == cadrej_leg_url %}nav__link--active{% endif %}">TEXTES LÉGISLATIFS</a>
                                     </li>
                                     <li class="nav__item">
-                                        <a href="#" class="nav__link nav__linkNone">TEXTES RÉGLÉMENTAIRES
+                                        <a href="{{cadrej_reg_url}}" class="nav__link nav__linkNone {% if request.path == cadrej_reg_url %}nav__link--active{% endif %}">TEXTES RÉGLÉMENTAIRES
                                         </a>
                                     </li>
                                     <li class="nav__item">
-                                        <a href="#" class="nav__link nav__linkNone">TEXTES DE NOMINATION</a>
+                                        <a href="{{cadrej_nom_url}}" class="nav__link nav__linkNone {% if request.path == cadrej_nom_url %}nav__link--active{% endif %}">TEXTES DE NOMINATION</a>
                                     </li>
                                 </ul>
                             </div>

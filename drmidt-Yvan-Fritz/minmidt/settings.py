@@ -42,9 +42,11 @@ INSTALLED_APPS = [
     'home.apps.HomeConfig',
     'blog.apps.BlogConfig',
     'stats.apps.StatsConfig',
+    'cadre_juridique.apps.CadreJuridiqueConfig',
     'TDS',
     'ETS_Premiere_Classe',
     'rest_framework',
+    'ckeditor',
 
 ]
 

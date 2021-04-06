@@ -1,0 +1,19 @@
+{% extends "blog/base.html" %}
+
+{% load static %}
+
+{% block content_left %}
+        {% for pdf in pdfs %}
+        <div class="section__pdf">
+            <div class="pdf">
+                <div class="left">
+                    <h6>{{pdf.title}}</h6>
+                </div>
+                <div class="right">
+                    <img src="{% static 'stats/images/pdf.jpg' %}" alt="PDF">
+                    <a href="/static/images/{{pdf.pdf}}">Télécharger</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+{% endblock content_left %}

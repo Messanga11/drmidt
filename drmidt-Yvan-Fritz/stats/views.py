@@ -12,7 +12,3 @@ class Dept_chartView(viewsets.ModelViewSet):
 def index(request):
     context = {"currentPage": 2}
     return render(request, "stats/stats.html", context)
-
-def cadre_juridique(request):
-    context = {"currentPage": 3}
-    return render(request, "stats/cadreJuridique.html", context)

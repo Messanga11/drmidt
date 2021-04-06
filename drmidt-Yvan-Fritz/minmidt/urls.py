@@ -22,6 +22,11 @@ urlpatterns = [
     path('', views.index, name='home'),
     path('admin/', admin.site.urls),
     path('blog/', include('blog.urls', namespace='blog')),
+    path('cadre-juridique/', include('cadre_juridique.urls')),
+    path('comite/', views.comite),
+    path('comite/actualite', views.actualite, name="actualite"),
+    path('services/', views.services),
+    path('services/projets', views.projets, name="projets"),
     path('', include('stats.urls')),
-    path('', include('TDS.urls'))
+    path('', include('TDS.urls')),
 ]

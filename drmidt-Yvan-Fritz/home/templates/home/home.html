@@ -57,21 +57,39 @@
     <section class="section__typeOne">
         <a href="/blog/potentialites/"><h2>Les Potentialités</h2></a>
         <div class="articles">
-            {% for post in potentialites_posts %}
-                {% if forloop.counter0 < 3 %}
-                    <a href="{{ post.get_absolute_url }}">
+                    <a href="{{ post_rec_mine.get_absolute_url }}">
                         <article class="section__typeOneItem">
                             <div class="section__itemImage">
-                                <img src="/static/images/{{post.thumbnail}}" alt="{{post.title}}">
+                                <img src="/static/images/{{post_rec_mine.thumbnail}}" alt="{{post_rec_mine.title}}">
                             </div>
                             <div class="section__itemText">
-                                <h3>{{post.title}}</h3>
-                                <p>{{ post.body|truncatewords:30|linebreaks }}</p>
+                                <h3>{{post_rec_mine.title}}</h3>
+                                <p>{{ post_rec_mine.body|truncatewords:30|linebreaks }}</p>
                             </div>
                         </article>
                     </a>
-                {% endif %}
-            {% endfor %}
+                    <a href="{{ post_rec_industrie.get_absolute_url }}">
+                        <article class="section__typeOneItem">
+                            <div class="section__itemImage">
+                                <img src="/static/images/{{post_rec_industrie.thumbnail}}" alt="{{post_rec_industrie.title}}">
+                            </div>
+                            <div class="section__itemText">
+                                <h3>{{post_rec_industrie.title}}</h3>
+                                <p>{{ post_rec_industrie.body|truncatewords:30|linebreaks }}</p>
+                            </div>
+                        </article>
+                    </a>
+                    <a href="{{ post_rec_devTech.get_absolute_url }}">
+                        <article class="section__typeOneItem">
+                            <div class="section__itemImage">
+                                <img src="/static/images/{{post_rec_devTech.thumbnail}}" alt="{{post_rec_devTech.title}}">
+                            </div>
+                            <div class="section__itemText">
+                                <h3>{{post_rec_devTech.title}}</h3>
+                                <p>{{ post_rec_devTech.body|truncatewords:30|linebreaks }}</p>
+                            </div>
+                        </article>
+                    </a>
         </div>
     </section>
     <section class="section__typeOne">

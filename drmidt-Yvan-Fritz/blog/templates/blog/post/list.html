@@ -5,6 +5,7 @@
 <h1 class="blogTitle">{{title}}</h1>
   <div class="blog-container">
   {% for post in posts %}
+  <a href="{{ post.get_absolute_url }}">
   <article class="card">
 		<header class="card__thumb">
 			<img src="/static/images/{{post.thumbnail}}" alt="{{post.title}}">
@@ -13,20 +14,23 @@
 			<span class="card__date__day">{{ post.publish }}</span>
 		</div>
 		<div class="card__body">
-			<div class="card__category"><a href="#">{{ post.category }}</a></div>
-			<div class="card__title"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></div>
-			<p class="card__description">{{ post.body|truncatewords:30|linebreaks }}</p>
+			<div class="card__category">{{ post.category }}</div>
+			<div class="card__title">{{ post.title }}</a></div>
+			<p class="card__description">{{ post.body|safe|truncatewords:30|linebreaks }}</p>
 		</div>
 		{% comment %} <footer class="card__footer">
 			<span class="icon icon--time">6 min</span>
-			<span class="icon icon--comment"><a href="#">2 comments</a></span>
+			<span class="icon icon--comment"><a href="#">2 comments</span>
 		</footer> {% endcomment %}
 	</article>
+	</a>
   {% endfor %}
   </div>
 {% endblock %}
 {% block recent_articles %}
   {% for post in posts %}
-			<li><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></li>
+	{% if forloop.counter0 < 3 %}
+	<li><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></li>
+	{% endif %}
   {% endfor %}
 {% endblock %}
