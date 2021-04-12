@@ -46,25 +46,38 @@
                             <li>
                                 <a href="#2017">2017</a>
                             </li>
-                            {% comment %} <li>
-                                <div style="text-align: left; padding: 5px; font-size: 13px">
+                            <li>
+                                <div id="checkboxes-annee" style="text-align: left; padding: 5px; font-size: 13px">
                                     <div>
-                                        <input type="checkbox" name="s1" id="s1">
+                                        <input type="checkbox" name="s1" id="s1" data-cat="Semestre" data-show="1" checked>
                                         <label for="s1">Semestre 1</label>
                                     </div>
-                                    <div>
-                                        <input type="checkbox" name="s2" id="s2">
-                                        <label for="s2">Semestre 2</label>
-                                    <div>
-                                        <input type="checkbox" name="c1" id="c1">
-                                        <label for="c1">1ere Classes</label>
+                                    <div style="margin: 5px 10px;">
+                                        <div>
+                                            <input type="checkbox" name="c1" id="c1" data-semestre="1" data-cat="class_type" data-show="1st" checked>
+                                            <label for="c1">1ere Classes</label>
+                                        </div>
+                                        <div>
+                                            <input type="checkbox" name="c2" id="c2" data-semestre="1" data-cat="class_type" data-show="2nd" checked>
+                                            <label for="c2">2e Classes</label>
+                                        </div>
                                     </div>
                                     <div>
-                                        <input type="checkbox" name="c2" id="c2">
-                                        <label for="c2">2e Classes</label>
+                                        <input type="checkbox" name="s2" id="s2" data-cat="Semestre" data-show="2" checked>
+                                        <label for="s2">Semestre 2</label>
+                                    </div>
+                                    <div style="margin: 5px 10px;">
+                                        <div>
+                                            <input type="checkbox" name="c1" id="c1" data-semestre="2" data-cat="class_type" data-show="1st" checked>
+                                            <label for="c1">1ere Classes</label>
+                                        </div>
+                                        <div>
+                                            <input type="checkbox" name="c2" id="c2" data-semestre="2" data-cat="class_type" data-show="2nd" checked>
+                                            <label for="c2">2e Classes</label>
+                                        </div>
                                     </div>
                                 </div>
-                            </li> {% endcomment %}
+                            </li>
                         </ul>
                     </div>
                 </section>
@@ -114,17 +127,17 @@
                         <div class="bottom">
                             <div class="el">
                                 <small>Nombre EC</small>
-                                <h2>75<div class="carret-up"></div></h2>
+                                <h2>0<div class="carret-up"></div></h2>
                                 <div id="line1"></div>
                             </div>
                             <div class="el">
                                 <small>Couverture Inspections</small>
-                                <h2>75<div class="carret-down"></div></h2>
+                                <h2>0<div class="carret-down"></div></h2>
                                 <div id="line2"></div>
                             </div>
                             <div class="el">
                                 <small>Conformité</small>
-                                <h2>75<div class="carret-down"></div></h2>
+                                <h2>0<div class="carret-down"></div></h2>
                                 <div id="line3"></div>
                             </div>
                         </div>

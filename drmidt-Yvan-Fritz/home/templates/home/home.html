@@ -113,26 +113,31 @@
         </div>
     </section>
     <section class="suggestions">
+        {% if sent == 1 %}
+            <p>Votre Suggestion a été prise en compte.</p>
+        {% endif %}
         <article class="suggestions__left">
             <h2>Boite à Suggestions</h2>
+            {{sent}}
         </article>
         <article class="suggestions__right">
-            <form action="#">
+            <form action="#" method="post">
+                {% csrf_token %}
                 <div class="suggestions__rightInputs">
                     <div class="inputs__left">
                         <div class="input__form">
                             <h6>Email</h6>
-                            <input type="text" placeholder="Email">
+                            {{form.from_email}}
                         </div>
                         <div class="input__form">
                             <h6>Contact</h6>
-                            <input type="text" placeholder="Téléphone">
+                            {{form.subject}}
                         </div>
                     </div>
                     <div class="input__textArea">
                         <h6>Message</h6>
                         <div class="textarea">
-                            <textarea type="text" placeholder="Que suggerez-vous ?"></textarea>
+                            {{form.message}}
                         </div>
                     </div>
                 </div>

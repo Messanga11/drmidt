@@ -1,6 +1,7 @@
 let resp = 1;
 const _pad = 40;
 const card = document.getElementsByClassName("card-stat")[0];
+const checkboxes = document.querySelector("#checkboxes-annee")
 const dataset = [
   {
     label: "Litoral",
@@ -10,12 +11,6 @@ const dataset = [
   },
 ];
 const filter = {};
-
-// Checkbox on the sidebar
-// const s1CheckBox = document.getElementById("s1");
-// const s2CheckBox = document.getElementById("s2");
-// const c1CheckBox = document.getElementById("c1");
-// const c2CheckBox = document.getElementById("c2");
 
 window.addEventListener("DOMContentLoaded", () => {
   fetch("/api/chartstats/?format=json")
@@ -29,6 +24,53 @@ window.addEventListener("DOMContentLoaded", () => {
             d.display = true;
             return d;
           });
+
+          for(let i = 0; i < checkboxes.children.length; i++) {
+            checkboxes.children[i].children[0].onclick = (e) => {
+              const dataCat = e.target.getAttribute("data-cat")
+              const dataShow = e.target.getAttribute("data-show")
+              const inputs = []
+              // Initialize every data to display false
+              data.forEach(x => {
+                  x["display"] = false;
+              })
+              // See checked checkboxes
+              for(let i = 0; i < checkboxes.children.length; i++) {
+                if(!e.target.checked) {
+                  data.forEach(x => {
+                    if(x[dataCat] == dataShow) {
+                      x["display"] = false;
+                    } else {
+                      x["display"] = true;
+                    }
+                })
+                }
+                if(checkboxes.children[i].children[0].checked) {
+                  data.forEach(x => {
+                    if (x[checkboxes.children[i].children[0].getAttribute("data-cat")] == checkboxes.children[i].children[0].getAttribute("data-show")) {
+                      x["display"] = true;
+                    }
+                  })
+                  inputs.push(e.target)
+                }
+              }
+              console.log(inputs)
+              if(inputs.length === 2){
+                data.forEach(x => {
+                  if (x[inputs[0].getAttribute("data-cat")] != inputs[1].getAttribute("data-cat") && x[inputs[0].getAttribute("data-show")] != inputs[1].getAttribute("data-show")) {
+                    if (x[inputs[0].getAttribute("data-cat")] == inputs[0].getAttribute("data-show")) {
+                      x["display"] = true;
+                    }
+                  } else {
+                    x["display"] = false;
+                  }
+                })
+              }
+              chartRemover()
+              renderAllCharts(data, _data)
+            }
+          }
+
           renderAllCharts(data, _data);
           // Filters
           const yearATags = document.querySelectorAll(".yearSelector a");
@@ -48,10 +90,10 @@ window.addEventListener("DOMContentLoaded", () => {
                 dataset[0].pertes[dep.department] = Number(dep.recovered);
               });
 
-              // s1CheckBox.checked = true;
-              // s2CheckBox.checked = true;
-              // c1CheckBox.checked = true;
-              // c2CheckBox.checked = true;
+              s1CheckBox.checked = true;
+              s2CheckBox.checked = true;
+              c1CheckBox.checked = true;
+              c2CheckBox.checked = true;
               renderAllCharts(filter[e.target.innerText], _data);
               e.target.classList.add("active");
             });

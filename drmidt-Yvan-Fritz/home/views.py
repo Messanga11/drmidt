@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.shortcuts import render, get_object_or_404
+from django.core.mail import send_mail
 from blog.models import Post
+from .forms import *
 
 # Create your views here.
 def index(request):
@@ -37,7 +39,17 @@ def index(request):
         if post.category == "développement_Technologique":
             context["post_rec_devTech"] = post
             break
-    print(context)
+    if request.method == "POST":
+        form = contactForm(request.POST)
+        if form.is_valid():
+            from_email = form.cleaned_data["from_email"]
+            subject = form.cleaned_data["subject"]
+            message = form.cleaned_data["message"]
+            send_mail(subject, message,from_email, ["minmidtlittoralcm@gmail.com"])
+            #return redirect('post_list', form)
+            return render(request, 'home/home.html', {'sent': 1,'form': form})
+    form = contactForm()
+    context['form'] = form
     return render(request, 'home/home.html', context)
 
 def comite(request):
@@ -59,21 +71,6 @@ def projets(request):
         'posts': posts
         }
     return render(request, "blog/post/list.html", context)
-
-
-def contact(request):
-    if request.method != "POST":
-        form = contactForm()
-        return render(request, 'index.html', {'form': form})
-    else:
-        form = contactForm(request.POST)
-        if form.is_valid():
-            from_email = form.cleaned_data["from_email"]
-            subject = form.cleaned_data["subject"]
-            message = form.cleaned_data["message"]
-            send_mail(subject, message,from_email, ["youjoseline@gmail.com"])
-    #return redirect('post_list', form)
-            return render(request, 'index.html', {'sent': 1,'form': form})
 
 def search(request):
     if request.method == 'POST':

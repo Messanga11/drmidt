@@ -15,12 +15,12 @@
 		</div>
 		<div class="card__body">
 			<div class="card__category">{{ post.category }}</div>
-			<div class="card__title">{{ post.title }}</a></div>
-			<p class="card__description">{{ post.body|safe|truncatewords:30|linebreaks }}</p>
+			<div class="card__title">{{ post.title }}</div>
+			<p class="card__description">{{ post.excerpt|safe|truncatewords:30|linebreaks }}</p>
 		</div>
 		{% comment %} <footer class="card__footer">
 			<span class="icon icon--time">6 min</span>
-			<span class="icon icon--comment"><a href="#">2 comments</span>
+			<span class="icon icon--comment"><a href="#">2 comments</a></span>
 		</footer> {% endcomment %}
 	</article>
 	</a>
