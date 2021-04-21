@@ -28,56 +28,39 @@
                             <h1>LITTORAL</h1>
                         </div>
                     </div>
-                    <div class="yearSelector">
+                    <div class="yearSelector year-selector">
                         <button id="annesBtn">Années<div class="carret-down-2"></button>
                         <ul>
-                            <li>
-                                <a href="#2021">2021</a>
-                            </li>
-                            <li>
-                                <a href="#2020">2020</a>
-                            </li>
-                            <li>
-                                <a href="#2019">2019</a>
-                            </li>
-                            <li>
-                                <a href="#2018">2018</a>
-                            </li>
-                            <li>
-                                <a href="#2017">2017</a>
-                            </li>
-                            <li>
-                                <div id="checkboxes-annee" style="text-align: left; padding: 5px; font-size: 13px">
+                            <div id="checkboxes-annee" style="text-align: left; padding: 5px; font-size: 13px">
+                                <div>
+                                    <input type="checkbox" name="s1" id="s1" data-cat="Semestre" data-show="1" checked>
+                                    <label for="s1">Semestre 1</label>
+                                </div>
+                                <div style="margin: 5px 10px;">
                                     <div>
-                                        <input type="checkbox" name="s1" id="s1" data-cat="Semestre" data-show="1" checked>
-                                        <label for="s1">Semestre 1</label>
-                                    </div>
-                                    <div style="margin: 5px 10px;">
-                                        <div>
-                                            <input type="checkbox" name="c1" id="c1" data-semestre="1" data-cat="class_type" data-show="1st" checked>
-                                            <label for="c1">1ere Classes</label>
-                                        </div>
-                                        <div>
-                                            <input type="checkbox" name="c2" id="c2" data-semestre="1" data-cat="class_type" data-show="2nd" checked>
-                                            <label for="c2">2e Classes</label>
-                                        </div>
+                                        <input type="checkbox" name="c1" id="s1_c1" data-semestre="1" data-cat="class_type" data-show="1st" checked>
+                                        <label for="s1_c1">1ere Classes</label>
                                     </div>
                                     <div>
-                                        <input type="checkbox" name="s2" id="s2" data-cat="Semestre" data-show="2" checked>
-                                        <label for="s2">Semestre 2</label>
-                                    </div>
-                                    <div style="margin: 5px 10px;">
-                                        <div>
-                                            <input type="checkbox" name="c1" id="c1" data-semestre="2" data-cat="class_type" data-show="1st" checked>
-                                            <label for="c1">1ere Classes</label>
-                                        </div>
-                                        <div>
-                                            <input type="checkbox" name="c2" id="c2" data-semestre="2" data-cat="class_type" data-show="2nd" checked>
-                                            <label for="c2">2e Classes</label>
-                                        </div>
+                                        <input type="checkbox" name="c2" id="s1_c2" data-semestre="1" data-cat="class_type" data-show="2nd" checked>
+                                        <label for="s1_c2">2e Classes</label>
                                     </div>
                                 </div>
-                            </li>
+                                <div>
+                                    <input type="checkbox" name="s2" id="s2" data-cat="Semestre" data-show="2" checked>
+                                    <label for="s2">Semestre 2</label>
+                                </div>
+                                <div style="margin: 5px 10px;">
+                                    <div>
+                                        <input type="checkbox" name="c1" id="s2_c1" data-semestre="2" data-cat="class_type" data-show="1st" checked>
+                                        <label for="s2_c1">1ere Classes</label>
+                                    </div>
+                                    <div>
+                                        <input type="checkbox" name="c2" id="s2_c2" data-semestre="2" data-cat="class_type" data-show="2nd" checked>
+                                        <label for="c2">2e Classes</label>
+                                    </div>
+                                </div>
+                            </div>
                         </ul>
                     </div>
                 </section>
@@ -102,7 +85,10 @@
                         <button id="">Sélections <div class="carret-down-2"></button>
                         <ul>
                             <li>
-                                <a href="#all"><h2>Région</h2></a>
+                                <a></a>
+                            </li>
+                            <li>
+                                <a href="#all" style="text-transform: uppercase;">Région</a>
                             </li>
                             <li>
                                 <a href="#wouri">WOURI</a>
@@ -111,7 +97,7 @@
                                 <a href="#nkam">NKAM</a>
                             </li>
                             <li>
-                                <a href="#sanagamaritime">SANAGA MARETIME</a>
+                                <a href="#sanagamaritime">SANAGA MARITIME</a>
                             </li>
                             <li>
                                 <a href="#moungo">MOUNGO</a>

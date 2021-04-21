@@ -1,6 +1,8 @@
 {% include 'blog/parts/header.html' %}
 {% load static %}
     {% block link %}<link rel="stylesheet" href="{% static 'stats/css/style.css' %}">{% endblock link %}
-    {% block content %}{% endblock content %}
+    <div style="display: block;margin:auto;max-width: 1200px;">
+        {% block content %}{% endblock content %}
+    </div>
     {% block scripts %}{% endblock scripts %}
 {% include 'blog/parts/footer.html' %}

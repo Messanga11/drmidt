@@ -1,7 +1,16 @@
 let resp = 1;
 const _pad = 40;
+// Check if a region is selected
+let clickedRegion = false
+let clickedYear = false
 const card = document.getElementsByClassName("card-stat")[0];
-const checkboxes = document.querySelector("#checkboxes-annee")
+const s1CheckBox = document.getElementById("s1");
+const s2CheckBox = document.getElementById("s2");
+const s1c1CheckBox = document.getElementById("s1_c1");
+const s1c2CheckBox = document.getElementById("s1_c2");
+const s2c1CheckBox = document.getElementById("s2_c1");
+const s2c2CheckBox = document.getElementById("s2_c2");
+const _regionSelector = document.querySelectorAll(".regionSelector ul li")
 const dataset = [
   {
     label: "Litoral",
@@ -10,7 +19,8 @@ const dataset = [
     EC: {},
   },
 ];
-const filter = {};
+const filter = {}
+const filteredData = {};
 
 window.addEventListener("DOMContentLoaded", () => {
   fetch("/api/chartstats/?format=json")
@@ -25,80 +35,38 @@ window.addEventListener("DOMContentLoaded", () => {
             return d;
           });
 
-          for(let i = 0; i < checkboxes.children.length; i++) {
-            checkboxes.children[i].children[0].onclick = (e) => {
-              const dataCat = e.target.getAttribute("data-cat")
-              const dataShow = e.target.getAttribute("data-show")
-              const inputs = []
-              // Initialize every data to display false
-              data.forEach(x => {
-                  x["display"] = false;
-              })
-              // See checked checkboxes
-              for(let i = 0; i < checkboxes.children.length; i++) {
-                if(!e.target.checked) {
-                  data.forEach(x => {
-                    if(x[dataCat] == dataShow) {
-                      x["display"] = false;
-                    } else {
-                      x["display"] = true;
-                    }
-                })
-                }
-                if(checkboxes.children[i].children[0].checked) {
-                  data.forEach(x => {
-                    if (x[checkboxes.children[i].children[0].getAttribute("data-cat")] == checkboxes.children[i].children[0].getAttribute("data-show")) {
-                      x["display"] = true;
-                    }
-                  })
-                  inputs.push(e.target)
-                }
-              }
-              console.log(inputs)
-              if(inputs.length === 2){
-                data.forEach(x => {
-                  if (x[inputs[0].getAttribute("data-cat")] != inputs[1].getAttribute("data-cat") && x[inputs[0].getAttribute("data-show")] != inputs[1].getAttribute("data-show")) {
-                    if (x[inputs[0].getAttribute("data-cat")] == inputs[0].getAttribute("data-show")) {
-                      x["display"] = true;
-                    }
-                  } else {
-                    x["display"] = false;
-                  }
-                })
-              }
-              chartRemover()
-              renderAllCharts(data, _data)
-            }
-          }
+          filteredData.s1_c1 = [...dataJSON.filter(x => x.Semestre == 1 && x.class_type == "1st")]
+          filteredData.s1_c2 = [...dataJSON.filter(x => x.Semestre == 1 && x.class_type == "2nd")]
+          filteredData.s2_c1 = [...dataJSON.filter(x => x.Semestre == 2 && x.class_type == "1st")]
+          filteredData.s2_c2 = [...dataJSON.filter(x => x.Semestre == 2 && x.class_type == "2nd")]
 
-          renderAllCharts(data, _data);
+          renderAllCharts([], _data);
           // Filters
-          const yearATags = document.querySelectorAll(".yearSelector a");
-          for (a of yearATags) {
-            a.addEventListener("click", (e) => {
-              for (a of yearATags) {
-                a.classList.remove("active");
-              }
-
-              chartRemover();
-
-              document
-                .querySelectorAll("#statSem .row")
-                .forEach((x) => x.remove());
-              filter[e.target.innerText]?.map((dep) => {
-                dataset[0].gains[dep.department] = Number(dep.money);
-                dataset[0].pertes[dep.department] = Number(dep.recovered);
-              });
-
-              s1CheckBox.checked = true;
-              s2CheckBox.checked = true;
-              c1CheckBox.checked = true;
-              c2CheckBox.checked = true;
-              renderAllCharts(filter[e.target.innerText], _data);
-              e.target.classList.add("active");
-            });
-          }
+          
         });
+        const checkboxes = [
+          s1CheckBox,
+          s2CheckBox,
+          s1c1CheckBox,
+          s1c2CheckBox,
+          s2c1CheckBox,
+          s2c2CheckBox
+        ]
+
+        s1CheckBox.checked = true;
+        s2CheckBox.checked = true;
+        s1c1CheckBox.checked = true;
+        s1c2CheckBox.checked = true;
+        s2c1CheckBox.checked = true;
+        s2c2CheckBox.checked = true;
+
+        checkboxes.forEach(cb => {
+          cb.onclick = () => {
+            chartRemover()
+            renderAllCharts([], _data);
+          }
+        })
+        
     })
     .catch((err) => {
       document.write("Une erreur est survenue.");
@@ -107,175 +75,135 @@ window.addEventListener("DOMContentLoaded", () => {
 });
 
 function chartRemover() {
-  document.querySelector("#sommesDues").children[0].remove();
-  document.querySelector("#repartEc").children[0].remove();
-  for (
-    let i = 0;
-    i < document.querySelector("#statSem")?.children.length;
-    i++
-  ) {
-    document.querySelector("#statSem")?.children[i].remove();
-  }
-  document.querySelector("#fullStats").children[0].remove();
+  document.querySelector("#sommesDues").children[0]?.remove();
+  document.querySelector("#repartEc").children[0]?.remove();
+  document.querySelector("#statSem").textContent = ""
+  document.querySelector("#fullStats").children[0]?.remove();
 }
 
 function renderAllCharts(data_, _data) {
-  // Filtrer les données ici
-  // const cData = data_;
 
-  // d3.selectAll(".yearSelector li div div")
-  //   .select("input")
-  //   .on("change", function () {
-  //     console.log("object");
-  //     s1CheckBox.onchange = function () {
-  //       if (this.checked) {
-  //         toShow = cData.forEach((x) => {
-  //           if (x.Semestre != "1") {
-  //             x["display"] = false;
-  //           } else {
-  //             x["display"] = true;
-  //           }
-  //         });
-  //       } else {
-  //         toShow = cData.forEach((x) => {
-  //           x["display"] = false;
-  //         });
-  //       }
-  //       if (s2CheckBox.checked) {
-  //         toShow = cData.forEach((x) => {
-  //           if (x.display === false) {
-  //             if (x.Semestre !== "2") {
-  //               x["display"] = false;
-  //             } else {
-  //               x["display"] = true;
-  //             }
-  //           }
-  //         });
-  //       }
-  //       if (c1CheckBox.checked) {
-  //         if (s2CheckBox.checked) {
-  //           toShow = cData.forEach((x) => {
-  //             if (x.class_type === "1st" && x.Semestre === "2") {
-  //               x["display"] = true;
-  //             } else {
-  //               if (
-  //                 x.class_type !== "1st" &&
-  //                 x.Semestre != "2" &&
-  //                 x.Semestre != "1"
-  //               ) {
-  //                 x["display"] = false;
-  //               } else {
-  //                 x["display"] = true;
-  //               }
-  //             }
-  //           });
-  //         }
-  //       }
-  //       if (c2CheckBox.checked) {
-  //         if (s2CheckBox.checked) {
-  //           toShow = cData.forEach((x) => {
-  //             if (x.class_type === "2nd" && x.Semestre === "2") {
-  //               x["display"] = true;
-  //             } else {
-  //               if (
-  //                 x.class_type !== "2nd" &&
-  //                 x.Semestre != "2" &&
-  //                 x.Semestre != "1"
-  //               ) {
-  //                 x["display"] = false;
-  //               } else {
-  //                 x["display"] = true;
-  //               }
-  //             }
-  //           });
-  //         }
-  //       }
-  //       chartRemover();
-  //       console.log(cData);
+  
+  console.log(clickedRegion)
+  console.log(clickedYear)
 
-  //       renderAllCharts(cData, _data);
-  //     };
+  let dataShow = []
 
-  //     s2CheckBox.onchange = function () {
-  //       if (this.checked) {
-  //         toShow = cData.forEach((x) => {
-  //           if (x.Semestre != "2") {
-  //             x["display"] = false;
-  //           } else {
-  //             x["display"] = true;
-  //           }
-  //         });
-  //       } else {
-  //         toShow = cData.forEach((x) => {
-  //           x["display"] = false;
-  //         });
-  //       }
-  //       chartRemover();
-  //       renderAllCharts(cData, _data);
-  //     };
 
-  //     c1CheckBox.onchange = function () {
-  //       if (this.checked) {
-  //         toShow = cData.forEach((x) => {
-  //           if (x.class_type !== "1st") {
-  //             x["display"] = false;
-  //           } else {
-  //             x["display"] = true;
-  //           }
-  //         });
-  //       } else {
-  //         toShow = cData.forEach((x) => {
-  //           x["display"] = false;
-  //         });
-  //       }
-  //       chartRemover();
-  //       renderAllCharts(cData, _data);
-  //     };
-  //     c2CheckBox.onchange = function () {
-  //       if (this.checked) {
-  //         toShow = cData.forEach((x) => {
-  //           if (x.class_type !== "2nd") {
-  //             x["display"] = false;
-  //           } else {
-  //             x["display"] = true;
-  //           }
-  //         });
-  //       } else {
-  //         toShow = cData.forEach((x) => {
-  //           x["display"] = false;
-  //         });
-  //       }
-  //       chartRemover();
-  //       renderAllCharts(cData, _data);
-  //     };
-  //   });
+  if(s1CheckBox.checked) {
+    if(s1c1CheckBox.checked) {
+      dataShow.push(...filteredData.s1_c1)
+    }
+    if(s1c2CheckBox.checked) {
+      dataShow.push(...filteredData.s1_c2)
+    }
+    if(!s1c1CheckBox.checked && !s1c2CheckBox.checked) {
+      dataShow.push(...filteredData.s1_c1)
+      dataShow.push(...filteredData.s1_c2)
+    }
+  }
+  if(s2CheckBox.checked) {
+    if(s2c1CheckBox.checked) {
+      dataShow.push(...filteredData.s2_c1)
+    }
+    if(s2c2CheckBox.checked) {
+      dataShow.push(...filteredData.s2_c2)
+    }
+    if(!s2c1CheckBox.checked && !s2c2CheckBox.checked) {
+      dataShow.push(...filteredData.s2_c1)
+      dataShow.push(...filteredData.s2_c2)
+    }
+  }
+  if(!s1CheckBox.checked && !s2CheckBox.checked) {
+    dataShow.push(...filteredData.s1_c1)
+    dataShow.push(...filteredData.s1_c2)
+    dataShow.push(...filteredData.s2_c1)
+    dataShow.push(...filteredData.s2_c2)
+  }
 
-  const data = [];
-  data_.map((x) => {
-    if (x.display === true) data.push(x);
-  });
-  console.log(data);
+  if(clickedYear) {
+      dataShow = clickedYear !== "all" ? dataShow.filter(x => {
+        return clickedYear !== "all" && String(x.year) === String(clickedYear)
+      }) : [...filteredData.s1_c1, ...filteredData.s1_c2, ...filteredData.s2_c1, ...filteredData.s2_c2]
+  }
+  
+  if(clickedRegion) {
+    if(clickedYear) {
+      dataShow = clickedYear !== "all" ? dataShow.filter(x => {
+        return clickedYear !== "all" && String(x.year) === String(clickedYear)
+      }) : [...filteredData.s1_c1, ...filteredData.s1_c2, ...filteredData.s2_c1, ...filteredData.s2_c2]
+    }
+      dataShow = clickedRegion !== "région" ? dataShow.filter(x => {
+        return clickedRegion !== "région" && String(x.department).toLowerCase() === clickedRegion
+      }) : [...filteredData.s1_c1, ...filteredData.s1_c2, ...filteredData.s2_c1, ...filteredData.s2_c2]
+  }
 
-  // Somme Dues
-  _data?.map((dep) => {
-    dataset[0].gains[dep.department] = Number(dep.money);
-    dataset[0].pertes[dep.department] = Number(dep.recovered);
-  });
+  let data = dataShow;
+  _regionSelector.forEach(li => {
+    li.onclick = function(e) {
+      clickedRegion = String(e.target.textContent).toLowerCase()
+        const data__ =  clickedRegion !== "région" ? dataShow.filter(x => {
+          return clickedRegion !== "région" && String(x.department).split("-").join(" ").toLowerCase() === String(e.target.textContent).toLowerCase()
+        }) : [...filteredData.s1_c1, ...filteredData.s1_c2, ...filteredData.s2_c1, ...filteredData.s2_c2]
+        chartRemover()
+        renderAllCharts(data__, _data)
+    }
+  })
+
+  console.log(dataset)
+
   const years = [];
   data?.map((depStat) => {
     if (!years.includes(Number(depStat.year))) {
       years.push(Number(depStat.year));
     }
   });
+
+  
   // Sort years
   years?.sort((a, b) => b - a);
   years?.forEach((y) => {
     filter[y] = data
-      .map((d) => d.year == y && d)
-      .filter((d) => typeof d != "boolean");
+    .map((d) => d.year == y && d)
+    .filter((d) => typeof d != "boolean");
+  });
+  
+  years.reverse().forEach(y => {
+    let li = document.createElement("li")
+    let a = document.createElement("a")
+    a.href = "#" + y
+    a.textContent = y
+    li.append(a)
+    document.querySelector(".yearSelector ul").prepend(li)
+  })
+
+  
+const yearATags = document.querySelectorAll(".year-selector a");
+
+  yearATags.forEach(a => {
+    a.onclick = function(e) {
+      clickedYear = String(e.target.textContent).toLowerCase()
+        const data__ =  clickedYear !== "all" ? dataShow.filter(x => {
+          return clickedYear !== "all" && String(x.year) === String(e.target.textContent)
+        }) : [...filteredData.s1_c1, ...filteredData.s1_c2, ...filteredData.s2_c1, ...filteredData.s2_c2]
+        chartRemover()
+        renderAllCharts(data__, _data)
+    }
+  })
+
+  if(data_?.length > 0) {
+    data = data_
+  }
+
+  console.log(data)
+
+  // Somme Dues
+  _data?.map((dep) => {
+    dataset[0].gains[dep.department] = Number(dep.money);
+    dataset[0].pertes[dep.department] = Number(dep.recovered);
   });
 
-  /* ###################### EC DATAS ########################### */
+  /* ---------------- EC DATAS -------------------- */
   dataset[0].EC["wouri"] = data?.reduce((a, c) => {
     if (c.department === "wouri") {
       return a + Number(c.nombre_de_ec_en_activite);
@@ -298,11 +226,11 @@ function renderAllCharts(data_, _data) {
     }
   }, 0);
   dataset[0].EC["sanaga-maritime"] = data?.reduce((a, c) => {
-    if (c.department === "sanaga-maritime") {
-      return a + Number(c.nombre_de_ec_en_activite);
-    } else {
-      return a + 0;
-    }
+      if (c.department === "sanaga-maritime") {
+        return a + Number(c.nombre_de_ec_en_activite);
+      } else {
+        return a + 0;
+      }
   }, 0);
   /* ################# TABLE STATS ####################### */
   data?.map((depStat) => {
@@ -515,7 +443,7 @@ function renderAllCharts(data_, _data) {
       }, 0),
     },
     sanaga_maratime: {
-      name: "Sanaga Maretime",
+      name: "Sanaga Maritime",
       inspects: data?.reduce((a, c) => {
         if (
           c.department === "sanaga-maritime" &&

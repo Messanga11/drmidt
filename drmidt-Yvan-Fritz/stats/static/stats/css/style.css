@@ -64,9 +64,7 @@ orange: #d99827;
 }
 
 .yearSelector {
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
+  width: 250px;
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
@@ -118,6 +116,7 @@ orange: #d99827;
   height: 220px !important;
   -webkit-transition: 0.4s ease-in-out;
   transition: 0.4s ease-in-out;
+  overflow-y: scroll!important;
 }
 
 .showRegion {
@@ -129,6 +128,10 @@ orange: #d99827;
 .yearSelector .active {
   text-decoration: underline;
   color: #d99827;
+}
+
+.regionSelector {
+  width: 250px!important;
 }
 
 /*########################### First Line ####################################*/
@@ -743,5 +746,15 @@ a {
 @media screen and (max-width: 640px) {
   html {
     font-size: 45%;
+  }
+}
+
+/* Min-Width */
+
+@media screen and (min-width: 1400px) {
+  .wrapper {
+    display: block;
+    width: fit-content;
+    margin: auto;
   }
 }
