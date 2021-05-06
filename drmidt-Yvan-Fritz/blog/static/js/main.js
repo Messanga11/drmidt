@@ -17,14 +17,22 @@ window.onload = () => {
     }
   };
   searchBtn.onclick = () => {
+    const loupeImg = document.createElement("img")
+    loupeImg.src = "/static/assets/loupe.svg"
+    loupeImg.alt = "loupe"
+    const closeBtn = document.createElement("strong")
+    closeBtn.textContent = "&times;"
+    closeBtn.style.padding = "5px"
     if (searchInput.style.width == "200px") {
+      searchBtn.textContent = ""
       search.classList.remove("border");
       searchInput.style.width = 0;
-      searchBtn.innerHTML = `<img src="assets/loupe.svg" alt="loupe">`;
+      loupeImg.append(loupeImg)
     } else {
+      searchBtn.textContent = ""
       search.classList.add("border");
       searchInput.style.width = "200px";
-      searchBtn.innerHTML = `<strong style="padding: 5px;">X</strong>`;
+      searchBtn.append(closeBtn)
     }
   };
 

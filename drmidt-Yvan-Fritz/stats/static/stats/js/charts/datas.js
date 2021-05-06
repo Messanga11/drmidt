@@ -40,7 +40,7 @@ window.addEventListener("DOMContentLoaded", () => {
           filteredData.s2_c1 = [...dataJSON.filter(x => x.Semestre == 2 && x.class_type == "1st")]
           filteredData.s2_c2 = [...dataJSON.filter(x => x.Semestre == 2 && x.class_type == "2nd")]
 
-          renderAllCharts([], _data);
+          renderAllCharts([], _data, resetYear=true);
           // Filters
           
         });
@@ -81,14 +81,9 @@ function chartRemover() {
   document.querySelector("#fullStats").children[0]?.remove();
 }
 
-function renderAllCharts(data_, _data) {
-
-  
-  console.log(clickedRegion)
-  console.log(clickedYear)
+function renderAllCharts(data_, _data, resetYear = false) {
 
   let dataShow = []
-
 
   if(s1CheckBox.checked) {
     if(s1c1CheckBox.checked) {
@@ -150,8 +145,6 @@ function renderAllCharts(data_, _data) {
     }
   })
 
-  console.log(dataset)
-
   const years = [];
   data?.map((depStat) => {
     if (!years.includes(Number(depStat.year))) {
@@ -168,14 +161,16 @@ function renderAllCharts(data_, _data) {
     .filter((d) => typeof d != "boolean");
   });
   
-  years.reverse().forEach(y => {
-    let li = document.createElement("li")
-    let a = document.createElement("a")
-    a.href = "#" + y
-    a.textContent = y
-    li.append(a)
-    document.querySelector(".yearSelector ul").prepend(li)
-  })
+  if(resetYear) {
+    years.reverse().forEach(y => {
+      let li = document.createElement("li")
+      let a = document.createElement("a")
+      a.href = "#" + y
+      a.textContent = y
+      li.append(a)
+      document.querySelector(".yearSelector ul").prepend(li)
+    })
+  }
 
   
 const yearATags = document.querySelectorAll(".year-selector a");
@@ -370,15 +365,17 @@ const yearATags = document.querySelectorAll(".year-selector a");
   fsTRs = document.querySelector(".fullStats-wrapper").children[1].children[0]
     .children; // FullStats Table tr elements
   for (let i = 0; i < fsTRs.length; i++) {
-    for (let j = 0; j < fsTRs.length; j++) {
-      if (i === 0) {
-        fsTRs[i].children[j + 1].textContent = years[j];
-      }
-      if (i === 1) {
-        fsTRs[i].children[j + 1].textContent = data1[j];
-      }
-      if (i === 2) {
-        fsTRs[i].children[j + 1].textContent = data2[j];
+    for (let j = 0; j < fsTRs[0].children.length; j++) { // fsTRs = Length of the first TR element
+      if(j != fsTRs[0].children.length - 1) {
+        if (i === 0) {
+          fsTRs[i].children[j + 1].textContent = years[j] || "n/a";
+        }
+        if (i === 1) {
+          fsTRs[i].children[j + 1].textContent = data1[j] || "n/a";
+        }
+        if (i === 2) {
+          fsTRs[i].children[j + 1].textContent = data2[j] || "n/a";
+        }
       }
     }
   }
