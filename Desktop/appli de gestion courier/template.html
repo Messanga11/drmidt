@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Courrier - Liaison</title>
+    <link rel="stylesheet" href="/fontawesome-free-5.15.3-web/css/all.css">
+</head>
+<style>
+    :root {
+        --bgColor: #1b1e2b;
+        --borderColor: #3b3e53;
+        --textColor: #f2efe5;
+        --textLightColor: #686671;
+        --textLightTableColor: #9e9ea0;
+        --activeColor: #0383b5;
+        --btnColor: #18a14f;
+    }
+    * {
+        transition: 0.2s;
+        box-sizing: border-box;
+    }
+    body {
+        background-color: var(--bgColor);
+        color: var(--textColor);
+        font-family: sans-serif;
+        min-height: 100vh;
+        margin: 0;
+    }
+    ul {
+        list-style: none;
+        padding: 0;
+    }
+    ul ul {
+        display: block;
+        padding-left: 15px;
+        height: 0;
+        overflow-y: hidden;
+    }
+    .container {
+        display: grid;
+        grid-template-columns: 400px 1fr;
+        grid-template-rows: 70px 1fr;
+        grid-template-areas: 'navbar navbar'
+                    'sidebar main';
+        min-height: 100vh;
+            
+    }
+    .navbar {
+       grid-area: navbar;
+       border-bottom: 1px solid var(--borderColor);
+       display: flex;
+    }
+    .navbar > * {
+        flex: 1;
+    }
+    .navbar > .left {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+    .navbar > .middle {
+        flex: 2;
+    }
+    .navbar > .right {
+        display: flex;
+        justify-content: flex-end;
+        padding-right: 12px;
+        align-items: center;
+    }
+    .avatar {
+        display: block;
+        width: 50px;
+        height: 50px;
+        border-radius: 999px;
+        object-fit: cover;
+        object-position: center;
+        margin: auto 5px;
+    }
+    .sidebar {
+        grid-area: sidebar; 
+        border-right: 1px solid var(--borderColor);
+        padding: 40px 0;
+    }
+    .sidebar a {
+        color: var(--textLightColor);
+        text-decoration: none;
+    }
+    .main {
+        grid-area: main; 
+    }
+    .main h2:nth-child(1) {
+        margin-top: 40px;
+        padding-left: 30px;
+    }
+    .nav {
+        display: flex;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        align-items: center;
+        height: 100%;
+    }
+
+    .nav li {
+        height: 100%;
+        width: fit-content;
+    }
+    .nav .nav-item-active-b {
+        border-bottom: 2px solid var(--activeColor);
+    }
+    .nav a {
+        display: flex;
+        text-decoration: none;
+        color: var(--textLightColor);
+        font-size: 14px;
+        font-weight: 500;
+        height: 100%;
+        width: fit-content;
+        align-items: center;
+        width: 100%;
+    }
+    .nav-item-active-b {
+        color: var(--activeColor)!important;
+    }
+    .nav-child {
+        margin-left: 50px;
+    }
+    .nav-col {
+        flex-direction: column;
+        margin: 0;
+        padding: 0;
+    }
+    .nav-col li {
+        margin: 10px 0;
+    }
+    .nav-item-content {
+        padding: 5px 60px;
+    }
+    .nav-item-content-soft {
+        padding: 25px 20px!important;
+    }
+    .nav-item-content i {
+        padding-right: 20px;
+    }
+    .nav-col .nav-item-active {
+        border-left: 4px solid var(--activeColor);
+    }
+    .nav-col li {
+       height: auto;
+    }
+    .nav-item-active a {
+        color: var(--activeColor);
+    }
+    /* Params */
+    .open {
+        height: fit-content;
+    }
+    .open ul {
+        height: auto;
+    }
+    .open .fa-caret-down {
+        transform: rotate(180deg);
+        transform-origin: center center;
+    }
+    .fl-table {
+        color: var(--textLightTableColor);
+    }
+    .thead-container {
+        border-top: var(--borderColor) solid 1px;
+    }
+    .thead-container .tr, .tbody .tr {
+        display: grid;
+        grid-template-columns: repeat(3, 10%) 20% 10% 25% 5% 10%;
+        padding: 20px 10px;
+        border-bottom: var(--borderColor) solid 1px;
+    }
+    .thead-container .tr {
+        color: var(--textColor);
+    }
+    .tbody .tr a {
+        height: fit-content;
+        width: 80%;
+        border-radius: 10px;
+        font-size: 13px;
+        font-weight: 600;
+        text-align: center;
+        background-color: var(--btnColor);
+        text-decoration: none;
+        color: var(--textColor);
+        padding: 20px 15px;
+    }
+    .thead-container .tr .th, .tbody .tr .td {
+        display: grid;
+        place-items: center;
+        font-size: 14px;
+    }
+    .td-menu-wrapper {
+        position: relative;
+    }
+    .td-menu {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        background-color: var(--bgColor);
+        box-shadow: 0 0 20px #000;
+        padding: 10px;
+        visibility: hidden;
+        opacity: 0;
+    }
+    .td-menu > * {
+        margin: 7px 0;
+    }
+    .tbody .tr span {
+        padding: 2px 4px;
+        margin-top: 6px;
+        margin-right: 6px;
+        margin-bottom: 6px;
+        background-color: var(--btnColor);
+        border-radius: 999px;
+        font-weight: 600;
+    }
+    .modal-overlay {
+        opacity: 0;
+        visibility: hidden;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, .7);
+        place-items: center;
+        transition: all 0.5s ease;
+    }
+    .modal-overlay .modal {
+        margin: auto;
+        position: relative;
+        background-color: var(--bgColor);
+        padding: 30px;
+        max-width: 50vw;
+        color: var(--textLightColor);
+    }
+    .modal-overlay .modal h2 {
+        margin-top: 10px;
+        font-size: 36px;
+        margin-bottom: 20px;
+    }
+    .modal-overlay .modal input[type=submit] {
+        background-color: var(--btnColor);
+        border: none;
+        cursor: pointer;
+        color: var(--textColor);
+    }
+    .modal-overlay .modal select {
+        padding: 10px 20px;
+        background-color: rgba(0, 0, 0, 0.2);
+        border: 1px solid var(--activeColor);
+        opacity: 0.6;
+        margin-top: 5px;
+        border-radius: 15px;
+        outline: none;
+        color: var(--textColor);
+    }
+    .modal-overlay .modal input, .modal-overlay .modal textarea {
+        width: 100%;
+        padding: 10px 20px;
+        background-color: rgba(0, 0, 0, 0.2);
+        border: 1px solid var(--activeColor);
+        opacity: 0.6;
+        margin-top: 5px;
+        border-radius: 15px;
+        outline: none;
+        color: var(--textColor);
+    }
+    .show {
+        opacity: 1;
+        visibility: visible;
+    }
+    #close-modal-btn {
+        font-size: 28px;
+        font-weight: 600;
+        cursor: pointer;
+        color: rgba(204, 86, 86, 0.4);
+        position: absolute;
+        right: 30px;
+        top: 30px;
+    }
+   /* .thead-container .th, .tbody .td {
+        width: 20%;
+    } */
+</style>
+<body>
+    <div class="container">
+        <div class="navbar">
+            <div class="left">
+                <div>
+                    <h4>MINMIDT Centre</h4>
+                </div>
+            </div>
+            <div class="middle">
+                <ul class="nav">
+                    <li><a href="#"><div class="nav-item-content">Dashsboard</div></a></li>
+                <li><a class="nav-item-active-b" href="#"><div class="nav-item-content" id="saveCourier">Enregistrement Courier</div></a></li>
+                </ul>
+            </div>
+            <div class="right">
+                <p>Welcome <strong>M. EZANE</strong></p>
+                <div>
+                    <img class="avatar" src="/1.png" alt="avatar">
+                </div>
+                <i class="fa fa-caret-down"></i>
+            </div>
+        </div>
+        <div class="sidebar">
+            <a href="#" data-toggle="userChilds"><div class="nav-item-content parent"><i class="fa fa-user"></i> Mon Profil&nbsp; &nbsp; <i class="fa fa-caret-down"></i></div></a>
+            <ul class="nav-child"  id="userChilds">
+                <li><a href="#"><div class="nav-item-content"><i class="fa fa-wallet"></i> Mes Couriers</div></a></li>
+            </ul>
+            <a href="#" data-toggle="saveChilds"><div class="nav-item-content parent"><i class="fa fa-folder"></i> Enregistrement&nbsp; &nbsp; <i class="fa fa-caret-down"></i></div></a>
+            <ul class="nav-child">
+                <li><a href="#"><div class="nav-item-content"><i class="fa fa-wallet"></i> Arrivées</div></a></li>
+                <li><a href="#"><div class="nav-item-content"><i class="fa fa-wallet"></i> Départs</div></a></li>
+            </ul>
+            <a href="#"><div class="nav-item-content parent"><i class="fa fa-file"></i> Transmis&nbsp; &nbsp; <i class="fa fa-caret-down"></i></div></a>
+                <ul class="nav-child">
+                    <li><a href="#"><div class="nav-item-content"><i class="fa fa-wallet"></i> Affaires Générales</div></a></li>
+                    <li><a href="#"><div class="nav-item-content"><i class="fa fa-wallet"></i> Brigade</div></a></li>
+                    <li><a href="#"><div class="nav-item-content"><i class="fa fa-wallet"></i> Service des Mines</div></a></li>
+                    <li><a href="#"><div class="nav-item-content"><i class="fa fa-wallet"></i> Service de l'Industrie</div></a></li>
+                </ul>
+            </li>
+            </ul>
+        </div>
+        <div class="main">
+            <h2>Admin Panel</h2>
+            <div>
+                <ul class="nav">
+                <li>
+                    <a href="#">
+                        <div class="nav-item-content-soft">Dashsboard</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <div class="nav-item-content-soft nav-item-active-b">Détails</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <div class="nav-item-content-soft">Paramètres</div>
+                    </a>
+                </li>
+                </ul>
+            </div>
+            <!-- ******************************************** -->
+            <!-- ******************************************** -->
+            <div class="table-wrapper">
+                <div class="fl-table">
+                    <div class="thead-container">
+                        <div class="tr">
+                          <div class="th">N~ordre</div>
+                          <div class="th">Expediteur</div>
+                          <div class="th">Destinataire</div>
+                          <div class="th">Objet</div>
+                          <div class="th">Date</div>
+                          <div class="th">Observations</div>
+                          <div class="th">Parcourt</div>
+                          <div class="th"></div>
+                        </div>
+                    </div>
+                  <div class="tbody">
+              
+                    <div class="tr">
+                      <div class="td">12</div>
+                      <div class="td">Délégué Régional</div>
+                      <div class="td">DG SONATREL</div>
+                      <div class="td">Sécurité des installations électriques</div>
+                      <div class="td"><span>A</span>26/04/2021<span>D</span>15/05/2021</div>
+                      <div class="td">Pour suite à donner</div>
+                      <div class="td td-menu-wrapper">
+                        <i class="fa fa-caret-down fa-2x"></i>
+                        <ul class="td-menu">
+                          <li><span>DR</span></li>
+                          <li><span>CSIDTPI</span></li>
+                        </ul>
+                      </div>
+              
+                      <td><a class="btn btn-info text-light" href="{% url 'transmission' id=arrive.id %}">Transmettre</a></td>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <!-- ******************************************** -->
+            <!-- ******************************************** -->
+        </div>
+        <div class="modal-overlay">
+            <div class="modal">
+                <span id="close-modal-btn">&times;</span>
+                <h2>Enregister un Courier</h2>
+                <form action="/enregistrement/" method="post">
+                    <input type="hidden" name="csrfmiddlewaretoken" value="h99gNqYXjmJstHUbxJ8BiQ1CyBL0nnNzpyaSdDSI8kwhbty73Ec94DsVDY86hMwa">
+                    <div class="form-group p-4 border bg-light m-5 shadow-sm text-dark rounded-sm border-info">
+                    <p>
+                        <label for="id_types">Types:</label>
+                        <select name="types" id="id_types">
+                            <option value="A">Arrive</option>
+                            <option value="D">Depart</option>
+                        </select>
+                    </p>
+                    <p><label for="id_expediteur">Expediteur</label> <input type="text" name="expediteur" class="form-control" maxlength="50" required="" id="id_expediteur"></p>
+                    <p><label for="id_destinataire">Destinataire</label> <input type="text" name="destinataire" class="form-control" maxlength="50" required="" id="id_destinataire"></p>
+                    <p><label for="id_date_arrive_depart_month">Date arrive depart</label> <select name="date_arrive_depart_month" required="" id="id_date_arrive_depart_month"><option value="1">January</option><option value="2">February</option><option value="3">March</option><option value="4">April</option><option value="5">May</option><option value="6">June</option><option value="7">July</option><option value="8">August</option><option value="9">September</option><option value="10">October</option><option value="11">November</option><option value="12">December</option></select><select name="date_arrive_depart_day" required="" id="id_date_arrive_depart_day"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option><option value="18">18</option><option value="19">19</option><option value="20">20</option><option value="21">21</option><option value="22">22</option><option value="23">23</option><option value="24">24</option><option value="25">25</option><option value="26">26</option><option value="27">27</option><option value="28">28</option><option value="29">29</option><option value="30">30</option><option value="31">31</option></select><select name="date_arrive_depart_year" required="" id="id_date_arrive_depart_year"><option value="2021">2021</option><option value="2022">2022</option><option value="2023">2023</option><option value="2024">2024</option><option value="2025">2025</option><option value="2026">2026</option><option value="2027">2027</option><option value="2028">2028</option><option value="2029">2029</option><option value="2030">2030</option></select></p>
+                    <p><label for="id_objet">Objet</label> <input type="text" name="objet" class="form-control" maxlength="1000" required="" id="id_objet"></p>
+                    <p><label for="id_numero_ordre">Numero ordre</label> <input type="number" name="numero_ordre" class="form-control" required="" id="id_numero_ordre"></p>
+                    <p><label for="id_numero_correspondance">Numero correspondance</label> <input type="number" name="numero_correspondance" class="form-control" required="" id="id_numero_correspondance"></p>
+                    <p><label for="id_observations">Observations</label> <textarea name="observations" cols="40" rows="10" class="form-control" required="" id="id_observations"></textarea></p>
+                    <input class="btn btn-block btn-info text-light" type="submit" value="Submit">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+const sideNavItems = document.querySelectorAll("#side-nav > li")
+const topNavItems = document.querySelectorAll("#top-nav > li")
+const saveBtn = document.querySelector("#saveCourier")
+const closeBtn = document.querySelector("#close-modal-btn")
+const modal = document.querySelector(".modal-overlay")
+const carets = document.querySelectorAll(".td .fa.fa-caret-down")
+
+carets.forEach(caret => {
+    const thisCaretMenu = caret.nextElementSibling
+    caret.onclick = () => {
+        thisCaretMenu.classList.toggle("show")
+    } 
+})
+
+closeBtn.onclick = () => {
+    modal.classList.toggle("show")
+}
+saveBtn.onclick = () => {
+    modal.classList.toggle("show")
+}
+sideNavItems.forEach(item => {
+    item.addEventListener('click', function (e) {
+        console.log(e.target.classList)
+        console.log(this)
+        if(event.target.classList.contains("parent")) {
+            item.classList.toggle("open")
+            sideNavItems.forEach(item => {item.classList.remove('nav-item-active')})
+            this.classList.add("nav-item-active")
+        }
+    })
+})
+</script>
+</html>

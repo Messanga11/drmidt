@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Départs</h2>
+            <div>
+                <ul class="nav">
+                <li>
+                    <a href="#">
+                        <div class="nav-item-content-soft nav-item-active-b">Dashsboard</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <div class="nav-item-content-soft">Détails</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <div class="nav-item-content-soft">Paramètres</div>
+                    </a>
+                </li>
+                </ul>
+            </div>
+<div class="table-wrapper">
+  <div class="fl-table">
+      <div class="thead-container">
+          <div class="tr">
+            <div class="th">N~ordre</div>
+            <div class="th">Expediteur</div>
+            <div class="th">Destinataire</div>
+            <div class="th">Objet</div>
+            <div class="th">Date</div>
+            <div class="th">Observations</div>
+            <div class="th">N~correspondance</div>
+            <div class="th"></div>
+          </div>
+      </div>
+    <div class="tbody">
+{% for depar in depart %}
+
+    <div class="tr">
+      <div class="td">{{depar.numero_ordre}}</div>
+      <div class="td">{{depar.expediteur}}</div>
+      <div class="td">{{depar.destinataire}}</div>
+      <div class="td">{{depar.objet}}</div>
+      <div class="td">{{depar.date}}</div>
+      <div class="td">{{depar.observations}}</div>
+      <div class="td">{{depar.numero_correspondance}}</div>
+      <div class="td"><a class="btn btn-info text-light" href="{% url 'transmission' id=depar.id %}">Transmettre</a></div>
+
+    </div>
+
+{% endfor %}
+  </div>
+  </div>
+  </div>
+
+{% endblock content %}

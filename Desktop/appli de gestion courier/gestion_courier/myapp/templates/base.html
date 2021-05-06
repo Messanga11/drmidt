@@ -1,0 +1,105 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Courrier - Liaison</title>
+    <link rel="stylesheet" href="{% static 'css/css/all.css' %}">
+    <link rel="stylesheet" href="{% static 'css/csss.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="navbar">
+            <div class="left">
+                <div>
+                    <h4>MINMIDT CENTRE</h4>
+                </div>
+            </div>
+            <div class="middle">
+                <ul class="nav">
+                    <li><a href="{% url 'accueil' %}" {% if request.path == "/accueil/" %}class="nav-item-active-b"{% endif %}><div class="nav-item-content">Dashsboard</div></a></li>
+                    {% if user.username == "DR" %}<li><a id="saveCourier"><div class="nav-item-content">Enregistrement Courier</div></a></li>{% endif %}
+                </ul>
+            </div>
+            <div class="right">
+               <div class="user-infos">
+                <p>Bienvenue <strong>{{user.first_name}}&nbsp;</strong></p>
+                <i class="fa fa-caret-down"></i>&nbsp;
+               </div>
+                <div class="user-menu-wrapper">
+                    <ul class="user-menu">
+                        <li>
+                            <a href="{% url 'logout' %}">Deconnexion</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="sidebar">
+            <a href="#" data-toggle="userChilds"><div class="nav-item-content parent"><i class="fa fa-user"></i> Mon Profil&nbsp; &nbsp; <i class="fa fa-caret-down"></i></div></a>
+            <ul class="nav-child"  id="userChilds">
+                <li><a href="{% url 'courier_transmis' slug='all' %}"><div class="nav-item-content"><i class="fa fa-wallet"></i> Mes Couriers</div></a></li>
+            </ul>
+            {% if request.user.username == "DR" %}
+                <a href="#" data-toggle="saveChilds"><div class="nav-item-content parent"><i class="fa fa-folder"></i> Enregistrement&nbsp; &nbsp; <i class="fa fa-caret-down"></i></div></a>
+                <ul class="nav-child">
+                    <li><a href="{% url 'liste_arrive' %}"><div class="nav-item-content"><i class="fa fa-receipt"></i> Arrivées</div></a></li>
+                    <li><a href="{% url 'liste_depart' %}"><div class="nav-item-content"><i class="fa fa-boxes"></i> Départs</div></a></li>
+                </ul>
+                <a href="#"><div class="nav-item-content parent"><i class="fa fa-file"></i> Transmis&nbsp; &nbsp; <i class="fa fa-caret-down"></i></div></a>
+                <ul class="nav-child">
+                    <li><a href="{% url 'courier_transmis' slug='SAG' %}"><div class="nav-item-content"><i class="fa fa-wallet"></i> Affaires Générales <span>{{countSAG}}</span></div></a></li>
+                    <li><a href="{% url 'courier_transmis' slug='BRCAM' %}"><div class="nav-item-content"><i class="fa fa-wallet"></i> Brigade <span>{{countBRCAM}}</span></div></a></li>
+                    <div class="sub-nav">
+                        <li><a href="{% url 'courier_transmis' slug='CMRN1' %}"><div class="nav-item-content"><i class="fa fa-wallet"></i> CMRN1 </div></a></li>
+                        <div class="s-sub-nav">
+                            <li><a href="{% url 'courier_transmis' slug='CADRE-CMRN1' %}"><div class="nav-item-content"><i class="fa fa-wallet"></i> CADRE CMRN1 </div></a></li>
+                        </div>
+                        <li><a href="{% url 'courier_transmis' slug='CMRN2' %}"><div class="nav-item-content"><i class="fa fa-wallet"></i> CMRN2 </div></a></li>
+                        <div class="s-sub-nav">
+                            <li><a href="{% url 'courier_transmis' slug='CADRE-CMRN2' %}"><div class="nav-item-content"><i class="fa fa-wallet"></i> CADRE CMRN2 </div></a></li>
+                        </div>
+                    </div>
+                    <li><a href="{% url 'courier_transmis' slug='SMGCM' %}"><div class="nav-item-content"><i class="fa fa-wallet"></i> Service des Mines <span>{{countSMGCM}}</span></div></a></li>
+                    <li><a href="{% url 'courier_transmis' slug='SIDTPI' %}"><div class="nav-item-content"><i class="fa fa-wallet"></i> Service de l'Industrie <span>{{countSIDTPI}}</span></div></a></li>
+                    <div class="sub-nav">
+                        <li><a href="{% url 'courier_transmis' slug='CBSEI' %}"><div class="nav-item-content"><i class="fa fa-wallet"></i> CBSEI </div></a></li>
+                        <div class="s-sub-nav">
+                            <li><a href="{% url 'courier_transmis' slug='CADRE-BSEI' %}"><div class="nav-item-content"><i class="fa fa-wallet"></i> CADRE BSEI </div></a></li>
+                        </div>
+                        <li><a href="{% url 'courier_transmis' slug='BSN' %}"><div class="nav-item-content"><i class="fa fa-wallet"></i> BSN </div></a></li>
+                        <div class="s-sub-nav">
+                            <li><a href="{% url 'courier_transmis' slug='CADRE-BSN' %}"><div class="nav-item-content"><i class="fa fa-wallet"></i> CADRE BSN </div></a></li>
+                        </div>
+                        <li><a href="{% url 'courier_transmis' slug='CB-DTPI' %}"><div class="nav-item-content"><i class="fa fa-wallet"></i> CB DTPI </div></a></li>
+                        <div class="s-sub-nav">
+                            <li><a href="{% url 'courier_transmis' slug='CADRE-CBDTPI' %}"><div class="nav-item-content"><i class="fa fa-wallet"></i> CADRE CBDTPI </div></a></li>
+                        </div>
+                    </div>
+                </ul>
+            {% endif %}
+            </li>
+            </ul>
+        </div>
+        <div class="main">
+          {% block content %}{% endblock content %}
+        </div>
+        <div class="modal-overlay" id="modal-overlay">
+          <div class="modal">
+              <span id="close-modal-btn">&times;</span>
+              <h2>Enregister un Courier</h2>
+              <form action="{% url 'enregistrement' %}" method="post">
+                {% csrf_token %}
+                <div class="form-group p-4 border bg-light m-5 shadow-sm text-dark rounded-sm border-info">
+                    {{ form.as_p }}
+                    <input class="btn btn-block btn-info text-light" type="submit" value="Submit" />
+                </div>
+            </form>
+          </div>
+      </div>
+    </div>
+</body>
+<script src="{% static 'js/main.js' %}"></script>
+</html>

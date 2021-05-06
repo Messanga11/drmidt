@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+{% if envoi == 1 %}
+<h1 class="display-1">Votre courier a bien été enregistre!</h1>
+
+{% else %}
+
+<h1 class="display-4 mt-5 p-2 mx-5 text-light">Enregistrement</h1>
+
+<form action="{% url 'enregistrement' %}" method="post">
+    {% csrf_token %}
+    <div class="form-group p-4 border bg-light m-5 shadow-sm text-dark rounded-sm border-info">
+        {{ form.as_p }}
+        <input class="btn btn-block btn-info text-light" type="submit" value="Submit" />
+    </div>
+</form>
+{% endif %}
+{% endblock %}

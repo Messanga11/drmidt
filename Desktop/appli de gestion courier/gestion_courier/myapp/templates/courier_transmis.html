@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2 id="title">Courriers Transmis : </h2>
+            <div>
+                <ul class="nav">
+                <li>
+                    <a href="#">
+                        <div class="nav-item-content-soft">Dashsboard</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <div class="nav-item-content-soft nav-item-active-b">Détails</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <div class="nav-item-content-soft">Paramètres</div>
+                    </a>
+                </li>
+                </ul>
+            </div>
+            <!-- ******************************************** -->
+            <!-- ******************************************** -->
+            <div class="table-wrapper">
+                <div class="fl-table">
+                    <div class="thead-container th-v2">
+                        <div class="tr">
+                          <div class="th">N° ordre</div>
+                          <div class="th">Expediteur</div>
+                          <div class="th">Provenance</div>
+                          <div class="th">Objet</div>
+                          <div class="th">Date</div>
+                          <div class="th">Observations</div>
+                          <div class="th">N° correspd.</div>
+                          <div class="th">Transmètre</div>
+                          <div class="th">Recevoir</div>
+                        </div>
+                    </div>
+                  <div class="tbody tb-v2">
+              {% for trans in transmission %}
+                    <div class="tr">
+                      <div class="td">{{trans.courier.numero_ordre}}</div>
+                      <div class="td">{{trans.expediteur}}</div>
+                      <div class="td">{{trans.courier.expediteur}}</div>
+                      <div class="td">{{trans.courier.objet}}</div>
+                      <div class="td">
+                        {{trans.date_transmission}}
+                      </div>
+                      <div class="td">{{trans.observations}}</div>
+                      <div class="td">{{trans.courier.numero_correspondance}}</div>
+                      <div class="td">
+                        <a class="btn-small" href="{% url 'transmission' trans.courier.id %}"><i class="fa fa-share-square"></i></a>
+                      </div>
+                      <div class="td">
+                        {% if trans.isReceived == False %}
+                          <a class="btn-small" href="{% url 'recevoir' trans.id %}"><i class="fa fa-check"></i></a>
+                        {% else %}
+                          <p class="btn-small"><i class="fa fa-check"></i><i class="fa fa-check"></i>&nbsp;Reçu</p>
+                        {% endif %}
+                      </div>
+                    </div>
+                {% endfor %}
+                  </div>
+                </div>
+              </div>
+              <script>
+                const path_url = "{{request.path}}"
+                const title = document.getElementById("title")
+                const splitedUrl = path_url.split('/')
+                title.append(splitedUrl[splitedUrl.length - 1].split("-").join(" "))
+              </script>
+{% endblock content %}

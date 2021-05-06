@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% if trans == "True" %}
+    <h1 class="display-1">Vote Courier a été transmis.</h1>
+{% else %}
+    {{trans}}
+<div class="p-4 mx-5 shadow">
+    <form action="#" method="post">
+        {% csrf_token %}
+        <div class="from-group">
+            <label for="destinataire">Destinataire: </label>
+            <select class="form-select my-2" name="destinataire" id="destinataire">
+                {% for destinataire in users %}
+                    <option value="{{destinataire.id}}">{{destinataire.username}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="from-group">
+            <label for="courier">Courier: </label>
+            <select class="form-select my-2" name="courier" id="courier">
+            {% for courier in couriers %}
+                <option value="{{courier.id}}">{{courier.id}}</option>
+            {% endfor %}
+        </select>
+        </div>
+        <div class="from-group">
+            <label for="obsv">observations: </label>
+            <textarea class="form-control" id="obsv" name="observations"></textarea>
+        </div>
+        <input class="btn my-2 btn-success" type="submit">
+    </form>
+</div>
+
+{% endif %}
+{% endblock content %}

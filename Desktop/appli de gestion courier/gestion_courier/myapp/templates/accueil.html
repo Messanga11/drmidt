@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Dashboard</h2>
+            <div>
+                <ul class="nav">
+                <li>
+                    <a href="#">
+                        <div class="nav-item-content-soft nav-item-active-b">Détails</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <div class="nav-item-content-soft">Paramètres</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <div class="nav-item-content-soft">Dashboard</div>
+                    </a>
+                </li>
+                </ul>
+            </div>
+            <!-- ******************************************** -->
+            <!-- ******************************************** -->
+            <div class="table-wrapper">
+                <div class="fl-table">
+                    <div class="thead-container">
+                        <div class="tr">
+                          <div class="th">N~ordre</div>
+                          <div class="th">Expediteur</div>
+                          <div class="th">Destinataire</div>
+                          <div class="th">Objet</div>
+                          <div class="th">Date</div>
+                          <div class="th">Observations</div>
+                          <div class="th">Parcourt</div>
+                          <div class="th"></div>
+                        </div>
+                    </div>
+                  <div class="tbody">
+              {% for courrier in courriers %}
+                    <div class="tr">
+                      <div class="td">{{courrier.courrier.numero_ordre}}</div>
+                      <div class="td">{{courrier.courrier.expediteur}}</div>
+                      <div class="td">{{courrier.courrier.destinataire}}</div>
+                      <div class="td">{{courrier.courrier.objet}}</div>
+                      <div class="td">
+                          {% if courrier.date != "" %}
+                            <span>{{courrier.courrier.types}}</span>{{courrier.courrier.date}}
+                          {% endif %}
+                          {% if courrier.courrier.isAlsoOther == True %}
+                            {% if courrier.courrier.date_other != "" %}
+                                <span>{% if courrier.courrier.types == "A" %}D{% else %}A{% endif %}</span>{{courrier.courrier.date}}
+                            {% endif %}
+                          {% endif %}
+                      </div>
+                      <div class="td">{{courrier.courrier.observations}}</div>
+                      <div class="td td-menu-wrapper">
+                        <i class="fa fa-caret-down fa-2x"></i>
+                        <ul class="td-menu">
+                          <li><span>DR</span></li>
+                          {% for parcourt in courrier.parcourt %}
+                          <li><span>{{parcourt.destinataire}}</span></li>
+                          {% endfor %}
+                        </ul>
+                      </div>
+              
+                      <div class="td"><a class="btn btn-info text-light" href="">Transmettre</a></div>
+                    </div>
+                {% endfor %}
+                  </div>
+                </div>
+              </div>
+{% endblock content %}

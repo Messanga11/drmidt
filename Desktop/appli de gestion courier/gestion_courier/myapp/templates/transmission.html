@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+    <div class="tranmitted-success-message">
+        <h1>Vote Courier a été transmis.</h1>
+    </div>
+    
+{% block content %}
+<h2 class="text-light display-4 mt-5">Transmission</h2>
+<div class="form">
+    <form action="#" method="post" class="text-dark">
+        {% csrf_token %}
+        <p>
+            <label for="destinataire">Destinataire: </label>
+            <select class="form-select my-2" name="destinataire" id="destinataire">
+                {% for destinataire in users %}
+                        <option value="{{destinataire.id}}">{{destinataire}}</option>
+                {% endfor %}
+            </select>
+        </p>
+        <p>
+            <label for="obsv">observations: </label>
+            <textarea class="form-control" id="obsv" name="observations" rows="10" cols="40"></textarea>
+        </p>
+        <input class="btn my-2 btn-info btn-block text-light" type="submit">
+    </form>
+</div>
+{% endblock content %}
